@@ -22,13 +22,29 @@ public class TagMenuUi implements InventoryHolder {
     private Inventory inventory;
 
     public TagMenuUi() {
-        this.inventory = Bukkit.createInventory(this, 27, miniMessage.deserialize(Vanillie.getGradientText("Tag Menü")));
+        this.inventory = Bukkit.createInventory(this, 27,
+                miniMessage.deserialize(Vanillie.getGradientText("Tag Menü")));
         setupInventory();
     }
 
     private void setupInventory() {
+        ItemStack backgroundItem = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        ItemMeta backgroundItemMeta = backgroundItem.getItemMeta();
+        backgroundItemMeta.displayName(Component.text(""));
+        backgroundItem.setItemMeta(backgroundItemMeta);
+
+        for (int i = 0; i < 9; i++) {
+            inventory.setItem(i, backgroundItem); // Obere Reihe
+            inventory.setItem(2 * 9 + i, backgroundItem); // Untere Reihe
+        }
+        for (int i = 0; i < 3; i++) {
+            inventory.setItem(i * 9, backgroundItem); // Linke Spalte
+            inventory.setItem(i * 9 + 8, backgroundItem); // Rechte Spalte
+        }
+
         // List Button
-        ItemStack listButton = new ItemStack(Material.BOOK);
+        ItemStack listButton = Vanillie.createCustomHeadItem(
+                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDVjNmRjMmJiZjUxYzM2Y2ZjNzcxNDU4NWE2YTU2ODNlZjJiMTRkNDdkOGZmNzE0NjU0YTg5M2Y1ZGE2MjIifX19");
         ItemMeta listItemMeta = listButton.getItemMeta();
         listItemMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Zeige alle Tags auf dem Server")));
 
@@ -40,8 +56,7 @@ public class TagMenuUi implements InventoryHolder {
         listButton.setAmount(14);
         listButton.setItemMeta(listItemMeta);
 
-        inventory.setItem(9+2, listButton);
-
+        inventory.setItem(9 + 2, listButton);
 
         // New Button
         ItemStack newButton = new ItemStack(Material.NETHER_STAR);
@@ -49,13 +64,13 @@ public class TagMenuUi implements InventoryHolder {
         newItemMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Neuen Tag erstellen")));
         newButton.setItemMeta(newItemMeta);
 
-        inventory.setItem(9+4, newButton);
-
+        inventory.setItem(9 + 4, newButton);
 
         // Settings Button
-        ItemStack settingsButton = new ItemStack(Material.COMPARATOR);
+        ItemStack settingsButton = Vanillie.createCustomHeadItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTdlZDY2ZjVhNzAyMDlkODIxMTY3ZDE1NmZkYmMwY2EzYmYxMWFkNTRlZDVkODZlNzVjMjY1ZjdlNTAyOWVjMSJ9fX0");
         ItemMeta settingsItemMeta = settingsButton.getItemMeta();
-        settingsItemMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Verwalte bereits existierende Tags")));
+        settingsItemMeta
+                .displayName(miniMessage.deserialize(Vanillie.getGradientText("Verwalte bereits existierende Tags")));
 
         List<Component> settingsLore = new ArrayList<>();
         settingsLore.add(miniMessage.deserialize(Vanillie.getGradientText("Hier kannst deine Tags verwalten.")));
@@ -66,12 +81,12 @@ public class TagMenuUi implements InventoryHolder {
         settingsButton.setAmount(2);
         settingsButton.setItemMeta(settingsItemMeta);
 
-        inventory.setItem(9+6, settingsButton);
+        inventory.setItem(9 + 6, settingsButton);
     }
 
     @Override
     public @NotNull Inventory getInventory() {
         return inventory;
     }
-    
+
 }

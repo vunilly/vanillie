@@ -9,7 +9,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -84,12 +86,26 @@ public class TagManager {
     }
 
     public static synchronized String newTag(UUID uuid, String tag) {
-        int newId = serverTagList.size();
+        int newId = findLowestAvailableId();
 
         serverTagList.add(new Tag(newId, uuid, tag));
 
         addTag(uuid, String.valueOf(newId));
         return "Der Tag wurde erfolgreich erstellt.";
+    }
+
+    private static int findLowestAvailableId() {
+        // Alle IDs die schon existieren sammeln
+        Set<Integer> usedIds = serverTagList.stream()
+                .map(Tag::getId)
+                .collect(Collectors.toSet());
+
+        // Die niedrigste freie ID finden
+        int id = 0;
+        while (usedIds.contains(id)) {
+            id++;
+        }
+        return id;
     }
 
     public static synchronized String addTag(UUID uuid, String stringId) {

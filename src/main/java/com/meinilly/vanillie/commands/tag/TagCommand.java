@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 import com.meinilly.vanillie.Vanillie;
+import com.meinilly.vanillie.tagmenu.TagMenuUi;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -58,6 +59,10 @@ public class TagCommand implements CommandExecutor, TabCompleter {
                 break;
             case "up":
                 upTag(player, args);
+                break;
+            case "menu":
+                TagMenuUi ui = new TagMenuUi();
+                player.openInventory(ui.getInventory());
                 break;
             default:
                 showTagUsage(player);

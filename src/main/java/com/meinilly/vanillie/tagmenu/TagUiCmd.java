@@ -21,8 +21,8 @@ public class TagUiCmd implements CommandExecutor {
             return true;
         }
         
-        TagMenuUi ui = new TagMenuUi();
-        player.openInventory(ui.getInventory());
+        // TagMenuUi ui = new TagMenuUi();
+        // player.openInventory(ui.getInventory());
         return true;
     }
 }
