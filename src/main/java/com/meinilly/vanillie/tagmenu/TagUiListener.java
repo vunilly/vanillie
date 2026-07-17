@@ -18,22 +18,26 @@ public class TagUiListener implements Listener {
 
     private boolean isTagUI(InventoryClickEvent event) {
         return event.getInventory().getHolder() instanceof TagMenuUi ||
-                event.getInventory().getHolder() instanceof TagMenuUiList;
+                event.getInventory().getHolder() instanceof TagMenuUiList ||
+                event.getInventory().getHolder() instanceof TagMenuUiNew;
     }
 
     private boolean isTagUI(InventoryDragEvent event) {
         return event.getInventory().getHolder() instanceof TagMenuUi ||
-                event.getInventory().getHolder() instanceof TagMenuUiList;
+                event.getInventory().getHolder() instanceof TagMenuUiList ||
+                event.getInventory().getHolder() instanceof TagMenuUiNew;
     }
 
     private boolean isTagUI(InventoryOpenEvent event) {
         return event.getInventory().getHolder() instanceof TagMenuUi ||
-                event.getInventory().getHolder() instanceof TagMenuUiList;
+                event.getInventory().getHolder() instanceof TagMenuUiList ||
+                event.getInventory().getHolder() instanceof TagMenuUiNew;
     }
 
     private boolean isTagUI(InventoryCloseEvent event) {
         return event.getInventory().getHolder() instanceof TagMenuUi ||
-                event.getInventory().getHolder() instanceof TagMenuUiList;
+                event.getInventory().getHolder() instanceof TagMenuUiList ||
+                event.getInventory().getHolder() instanceof TagMenuUiNew;
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -70,10 +74,40 @@ public class TagUiListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         player.updateInventory();
 
-        switch (event.getRawSlot()) {
-            case 11:
-                player.openInventory(new TagMenuUiList(player).getInventory());
-                break;
+        if (event.getInventory().getHolder() instanceof TagMenuUi) {
+            switch (event.getRawSlot()) {
+                case 11:
+                    player.openInventory(new TagMenuUiList(player).getInventory());
+                    break;
+                case 13:
+                    player.openInventory(new TagMenuUiNew(player).getInventory());
+                    break;
+                case 15:
+                    player.openInventory(new TagMenuUiManager(player).getInventory());
+                    break;
+            }
+        } else if (event.getInventory().getHolder() instanceof TagMenuUiList) {
+            TagMenuUiList menuUi = (TagMenuUiList) event.getInventory().getHolder();
+
+            switch (event.getRawSlot()) {
+                case (9 * 4 + 4):
+                    player.openInventory(new TagMenuUi(player).getInventory());
+                    break;
+                case (9 * 4 + 2):
+                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex() - 1).getInventory());
+                    break;
+                case (9 * 4 + 6):
+                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex() + 1).getInventory());
+                    break;
+            }
+        } else if (event.getInventory().getHolder() instanceof TagMenuUiNew) {
+            switch (event.getRawSlot()) {
+                case (9 * 2 + 4):
+                    player.openInventory(new TagMenuUi(player).getInventory());
+                    break;
+            }
+        } else if (event.getInventory().getHolder() instanceof TagMenuUiManager) {
+
         }
     }
 

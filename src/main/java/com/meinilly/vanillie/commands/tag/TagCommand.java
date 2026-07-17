@@ -61,7 +61,7 @@ public class TagCommand implements CommandExecutor, TabCompleter {
                 upTag(player, args);
                 break;
             case "menu":
-                TagMenuUi ui = new TagMenuUi();
+                TagMenuUi ui = new TagMenuUi(player);
                 player.openInventory(ui.getInventory());
                 break;
             default:

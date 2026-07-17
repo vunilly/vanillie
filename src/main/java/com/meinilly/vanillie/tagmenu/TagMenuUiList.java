@@ -28,11 +28,17 @@ public class TagMenuUiList implements InventoryHolder {
     private final static MiniMessage miniMessage = MiniMessage.miniMessage();
     private Inventory inventory;
     private UUID playerUUID;
+    private int pageIndex;
 
     public TagMenuUiList(Player player) {
+        this(player, 0);
+    }
+
+    public TagMenuUiList(Player player, int page) {
         this.playerUUID = player.getUniqueId();
+        this.pageIndex = page;
         this.inventory = Bukkit.createInventory(this, 45,
-                miniMessage.deserialize(Vanillie.getGradientText("Tag Liste")));
+                miniMessage.deserialize(Vanillie.getGradientText("Tag Liste (Seite " + (page + 1) + ")")));
         setupInventory();
     }
 
@@ -44,17 +50,38 @@ public class TagMenuUiList implements InventoryHolder {
 
         for (int i = 0; i < 9; i++) {
             inventory.setItem(i, backgroundItem);
-            inventory.setItem(4*9 + i, backgroundItem);
+            inventory.setItem(4 * 9 + i, backgroundItem);
         }
         for (int i = 0; i < 4; i++) {
-            inventory.setItem(i*9, backgroundItem);
-            inventory.setItem(i*9 + 8, backgroundItem);
+            inventory.setItem(i * 9, backgroundItem);
+            inventory.setItem(i * 9 + 8, backgroundItem);
         }
 
         List<Tag> tagList = TagManager.getServerTagList();
 
-        int pos = 0;
-        for (Tag tag : tagList) {
+        int pageSize = 21;
+        int pageStart = pageSize * this.pageIndex;
+        int pageEnd = pageSize * (this.pageIndex + 1);
+
+        // Richtig berechnen!
+        int maxPage = (int) Math.ceil((double) tagList.size() / pageSize) - 1;
+
+        // Grenzen validieren
+        if (this.pageIndex > maxPage) {
+            this.pageIndex = maxPage;
+        }
+        if (this.pageIndex < 0) {
+            this.pageIndex = 0;
+        }
+
+        if (pageEnd > tagList.size()) {
+            pageEnd = tagList.size();
+        }
+
+        int inventoryPosition = 0;
+        for (int i = pageStart; i < pageEnd; i++) {
+            Tag tag = tagList.get(i);
+
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(tag.getOwnerUUID());
             String username = offlinePlayer.getName();
 
@@ -67,58 +94,69 @@ public class TagMenuUiList implements InventoryHolder {
             List<Component> tagLore = new ArrayList<>();
 
             if (TagManager.doesPlayerHaveTag(playerUUID, tag.getId())) {
-                tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextSecondary("Klicke um den Tag zu deaktivieren.")));
-                tagItemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
-                tagItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextSecondary("Klicke um den Tag zu ")
+                        + Vanillie.getGradientTextGreen("aktivieren.") + this.pageIndex));
             } else {
-                tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextSecondary("Klicke um den Tag zu benutzen.")));
+                tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextSecondary("Klicke um den Tag zu ")
+                        + Vanillie.getImportantText("deaktiveren.")));
             }
             tagLore.add(miniMessage.deserialize(Vanillie.getGradientText("Ersteller*in: " + username)));
             tagLore.add(miniMessage.deserialize(Vanillie.getGradientText("Benutzer*innen: " + userCount)));
-            if (playerUUID == tag.getOwnerUUID()) {
-                tagLore.add(miniMessage.deserialize(Vanillie.getImportantText("Dieser Tag gehört dir!")));
+            if (playerUUID.equals(tag.getOwnerUUID())) {
+                tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Dieser Tag gehört dir!")));
+            } else {
+                tagLore.add(miniMessage.deserialize(Vanillie.getImportantText("Dieser Tag gehört nicht dir!")));
             }
             tagItemMeta.lore(tagLore);
 
             tagButton.setAmount(userCount);
             tagButton.setItemMeta(tagItemMeta);
 
-            inventory.setItem(pos, tagButton);
+            inventory.setItem(10 + inventoryPosition % 7 + Math.round(inventoryPosition / 7) * 9, tagButton);
 
-            pos++;
-
+            inventoryPosition++;
         }
 
+        // Last Button
+        ItemStack lastButton = Vanillie.createCustomHeadItem(
+                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM5NzExMjRiZTg5YWM3ZGM5YzkyOWZlOWI2ZWZhN2EwN2NlMzdjZTFkYTJkZjY5MWJmODY2MzQ2NzQ3N2M3In19fQ");
+        ItemMeta lastMeta = lastButton.getItemMeta();
+        lastMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Letze Seite")));
+
+        lastButton.setItemMeta(lastMeta);
+
+        inventory.setItem(9 * 4 + 2, lastButton);
+
         // Back Button
-        ItemStack backButton = Vanillie.createCustomHeadItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM5NzExMjRiZTg5YWM3ZGM5YzkyOWZlOWI2ZWZhN2EwN2NlMzdjZTFkYTJkZjY5MWJmODY2MzQ2NzQ3N2M3In19fQ");
-        ItemMeta backButtonMeta = backButton.getItemMeta();
-        backButtonMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Letze Seite")));
+        ItemStack backButton = new ItemStack(Material.ARROW);
+        ItemMeta backMeta = backButton.getItemMeta();
+        backMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Zurück")));
 
-        backButton.setItemMeta(backButtonMeta);
+        backButton.setItemMeta(backMeta);
 
-        inventory.setItem(9*4 + 2, backButton);
-
-        // Back Button
-        ItemStack lastButton = new ItemStack(Material.BARRIER);
-        ItemMeta lastButtonMeta = lastButton.getItemMeta();
-        lastButtonMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Zurück")));
-
-        lastButton.setItemMeta(lastButtonMeta);
-
-        inventory.setItem(9*4 + 4, lastButton);
+        inventory.setItem(9 * 4 + 4, backButton);
 
         // Next Button
-        ItemStack nextButton = Vanillie.createCustomHeadItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjY3MWM0YzA0MzM3YzM4YTVjN2YzMWE1Yzc1MWY5OTFlOTZjMDNkZjczMGNkYmVlOTkzMjA2NTVjMTlkIn19fQ");
+        ItemStack nextButton = Vanillie.createCustomHeadItem(
+                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjY3MWM0YzA0MzM3YzM4YTVjN2YzMWE1Yzc1MWY5OTFlOTZjMDNkZjczMGNkYmVlOTkzMjA2NTVjMTlkIn19fQ");
         ItemMeta nextButtonMeta = nextButton.getItemMeta();
         nextButtonMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Nächste Seite")));
 
         nextButton.setItemMeta(nextButtonMeta);
 
-        inventory.setItem(9*4 + 6, nextButton);
+        inventory.setItem(9 * 4 + 6, nextButton);
     }
 
     @Override
     public @NotNull Inventory getInventory() {
         return inventory;
+    }
+
+    public int getPageIndex() {
+        return this.pageIndex;
+    }
+
+    public void setPageIndex(int pageIndex) {
+        this.pageIndex = pageIndex;
     }
 }

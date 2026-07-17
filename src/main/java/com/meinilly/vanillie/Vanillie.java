@@ -66,6 +66,10 @@ public class Vanillie extends JavaPlugin {
         return "<gradient:#ff52dc:#c4abff>" + text + "</gradient>";
     }
 
+    public static String getGradientTextGreen(String text) {
+        return "<gradient:#4ceb34:#34eb98>" + text + "</gradient>";
+    }
+
     public static String getGradientTextSecondary(String text) {
         return "<gradient:#ff52dc:#a719ff>" + text + "</gradient>";
     }

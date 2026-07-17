@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +22,7 @@ public class TagMenuUi implements InventoryHolder {
     private final static MiniMessage miniMessage = MiniMessage.miniMessage();
     private Inventory inventory;
 
-    public TagMenuUi() {
+    public TagMenuUi(Player player) {
         this.inventory = Bukkit.createInventory(this, 27,
                 miniMessage.deserialize(Vanillie.getGradientText("Tag Menü")));
         setupInventory();
