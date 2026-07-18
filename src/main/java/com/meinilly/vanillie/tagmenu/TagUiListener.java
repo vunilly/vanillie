@@ -94,10 +94,14 @@ public class TagUiListener implements Listener {
                     player.openInventory(new TagMenuUi(player).getInventory());
                     break;
                 case (9 * 4 + 2):
-                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex() - 1).getInventory());
+                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex() - 1, menuUi.getFilterOption()).getInventory());
                     break;
                 case (9 * 4 + 6):
-                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex() + 1).getInventory());
+                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex() + 1, menuUi.getFilterOption()).getInventory());
+                    break;
+                case (4):
+                    player.openInventory(new TagMenuUiList(player, menuUi.getPageIndex(), (menuUi.getFilterOption() + 1)%3).getInventory());
+                    player.sendMessage("[ee]" + (menuUi.getFilterOption()));
                     break;
             }
         } else if (event.getInventory().getHolder() instanceof TagMenuUiNew) {

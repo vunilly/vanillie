@@ -29,16 +29,46 @@ public class TagMenuUiList implements InventoryHolder {
     private Inventory inventory;
     private UUID playerUUID;
     private int pageIndex;
+    private int pageSize;
+    private int maxPage;
+    private int minPage;
+    private int showTags; // 0=all, 1=created, 2=active
 
     public TagMenuUiList(Player player) {
-        this(player, 0);
+        this(player, 0, 0);
     }
 
-    public TagMenuUiList(Player player, int page) {
+    public TagMenuUiList(Player player, int page, int showTags) {
         this.playerUUID = player.getUniqueId();
+        this.pageSize = 21;
         this.pageIndex = page;
+        this.showTags = showTags;
+        player.sendMessage(page + "");
+
+        List<Tag> tagList;
+        if (showTags == 0) {
+            tagList = TagManager.getServerTagList();
+            player.sendMessage("ist0");
+        } else if(showTags == 1) {
+            tagList = TagManager.getCreatedTagsForPlayer(playerUUID);
+            player.sendMessage("ist1");
+        } else {
+            tagList = TagManager.getActiveTagsForPlayer(playerUUID);
+            player.sendMessage("ist2");
+        }
+
+        this.maxPage = (int) Math.ceil((double) tagList.size() / pageSize) - 1;
+
+        // Grenzen validieren
+        if (this.pageIndex > maxPage) {
+            this.pageIndex = maxPage;
+        }
+        if (this.pageIndex < 0) {
+            this.pageIndex = 0;
+        }
+        player.sendMessage(this.pageIndex + "");
         this.inventory = Bukkit.createInventory(this, 45,
-                miniMessage.deserialize(Vanillie.getGradientText("Tag Liste (Seite " + (page + 1) + ")")));
+                miniMessage.deserialize(Vanillie.getGradientText("Tag Liste (Seite " + (this.pageIndex + 1) + ")")));
         setupInventory();
     }
 
@@ -59,20 +89,8 @@ public class TagMenuUiList implements InventoryHolder {
 
         List<Tag> tagList = TagManager.getServerTagList();
 
-        int pageSize = 21;
-        int pageStart = pageSize * this.pageIndex;
-        int pageEnd = pageSize * (this.pageIndex + 1);
-
-        // Richtig berechnen!
-        int maxPage = (int) Math.ceil((double) tagList.size() / pageSize) - 1;
-
-        // Grenzen validieren
-        if (this.pageIndex > maxPage) {
-            this.pageIndex = maxPage;
-        }
-        if (this.pageIndex < 0) {
-            this.pageIndex = 0;
-        }
+        int pageStart = this.pageSize * this.pageIndex;
+        int pageEnd = this.pageSize * (this.pageIndex + 1);
 
         if (pageEnd > tagList.size()) {
             pageEnd = tagList.size();
@@ -104,6 +122,7 @@ public class TagMenuUiList implements InventoryHolder {
             tagLore.add(miniMessage.deserialize(Vanillie.getGradientText("Benutzer*innen: " + userCount)));
             if (playerUUID.equals(tag.getOwnerUUID())) {
                 tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Dieser Tag gehört dir!")));
+                tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Rechtsklicke zum bearbeiten.")));
             } else {
                 tagLore.add(miniMessage.deserialize(Vanillie.getImportantText("Dieser Tag gehört nicht dir!")));
             }
@@ -117,15 +136,17 @@ public class TagMenuUiList implements InventoryHolder {
             inventoryPosition++;
         }
 
-        // Last Button
-        ItemStack lastButton = Vanillie.createCustomHeadItem(
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM5NzExMjRiZTg5YWM3ZGM5YzkyOWZlOWI2ZWZhN2EwN2NlMzdjZTFkYTJkZjY5MWJmODY2MzQ2NzQ3N2M3In19fQ");
-        ItemMeta lastMeta = lastButton.getItemMeta();
-        lastMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Letze Seite")));
+        if (this.pageIndex > this.minPage) {
+            // Last Button
+            ItemStack lastButton = Vanillie.createCustomHeadItem(
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM5NzExMjRiZTg5YWM3ZGM5YzkyOWZlOWI2ZWZhN2EwN2NlMzdjZTFkYTJkZjY5MWJmODY2MzQ2NzQ3N2M3In19fQ");
+            ItemMeta lastMeta = lastButton.getItemMeta();
+            lastMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Letze Seite")));
 
-        lastButton.setItemMeta(lastMeta);
+            lastButton.setItemMeta(lastMeta);
 
-        inventory.setItem(9 * 4 + 2, lastButton);
+            inventory.setItem(9 * 4 + 2, lastButton);
+        }
 
         // Back Button
         ItemStack backButton = new ItemStack(Material.ARROW);
@@ -136,15 +157,65 @@ public class TagMenuUiList implements InventoryHolder {
 
         inventory.setItem(9 * 4 + 4, backButton);
 
-        // Next Button
-        ItemStack nextButton = Vanillie.createCustomHeadItem(
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjY3MWM0YzA0MzM3YzM4YTVjN2YzMWE1Yzc1MWY5OTFlOTZjMDNkZjczMGNkYmVlOTkzMjA2NTVjMTlkIn19fQ");
-        ItemMeta nextButtonMeta = nextButton.getItemMeta();
-        nextButtonMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Nächste Seite")));
+        if (this.pageIndex < this.maxPage) {
+            // Next Button
+            ItemStack nextButton = Vanillie.createCustomHeadItem(
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjY3MWM0YzA0MzM3YzM4YTVjN2YzMWE1Yzc1MWY5OTFlOTZjMDNkZjczMGNkYmVlOTkzMjA2NTVjMTlkIn19fQ");
+            ItemMeta nextButtonMeta = nextButton.getItemMeta();
+            nextButtonMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Nächste Seite")));
 
-        nextButton.setItemMeta(nextButtonMeta);
+            nextButton.setItemMeta(nextButtonMeta);
 
-        inventory.setItem(9 * 4 + 6, nextButton);
+            inventory.setItem(9 * 4 + 6, nextButton);
+        }
+
+        // Filter Button
+        if (this.showTags == 0) {
+            ItemStack filterButton = new ItemStack(Material.WHITE_DYE);
+            ItemMeta fitlerMeta = filterButton.getItemMeta();
+            fitlerMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Filtern")));
+
+            List<Component> filterLore = new ArrayList<>();
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Alle anzeigen")));
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine erstellten anzeigen")));
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine aktiven anzeigen")));
+
+            filterButton.lore(filterLore);
+
+            filterButton.setItemMeta(fitlerMeta);
+
+            inventory.setItem(4, filterButton);
+        } else if (this.showTags == 1) {
+            ItemStack filterButton = new ItemStack(Material.GREEN_DYE);
+            ItemMeta fitlerMeta = filterButton.getItemMeta();
+            fitlerMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Filtern")));
+
+            List<Component> filterLore = new ArrayList<>();
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Alle anzeigen")));
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Nur meine erstellten anzeigen")));
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine aktiven anzeigen")));
+
+            filterButton.lore(filterLore);
+
+            filterButton.setItemMeta(fitlerMeta);
+
+            inventory.setItem(4, filterButton);
+        } else {
+            ItemStack filterButton = new ItemStack(Material.PURPLE_DYE);
+            ItemMeta fitlerMeta = filterButton.getItemMeta();
+            fitlerMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Filtern")));
+
+            List<Component> filterLore = new ArrayList<>();
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Alle anzeigen")));
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine erstellten anzeigen")));
+            filterLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Nur meine aktiven anzeigen")));
+
+            filterButton.lore(filterLore);
+
+            filterButton.setItemMeta(fitlerMeta);
+
+            inventory.setItem(4, filterButton);
+        }
     }
 
     @Override
@@ -158,5 +229,13 @@ public class TagMenuUiList implements InventoryHolder {
 
     public void setPageIndex(int pageIndex) {
         this.pageIndex = pageIndex;
+    }
+
+    public void setFilterOption(int filterOption) {
+        this.showTags = filterOption;
+    }
+
+    public int getFilterOption() {
+        return this.showTags;
     }
 }

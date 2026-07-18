@@ -260,11 +260,49 @@ public class TagManager {
         return false;
     }
 
-    public static List<Tag> getServerTagList() {
+    public static synchronized int getPlayerCreatedTagCount(UUID playerUuid) {
+        int count = 0;
+        for (Tag tag : serverTagList) {
+            if (tag.getOwnerUUID().equals(playerUuid)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static synchronized List<Tag> getActiveTagsForPlayer(UUID playerUuid) {
+        List<Tag> tagListForPlayer = Collections.synchronizedList(new ArrayList<>());
+
+        for (int tagId : playerUsedTags.get(playerUuid)) {
+            Tag foundTag = findTagById(tagId);
+            if (foundTag != null) {
+                tagListForPlayer.add(foundTag);
+            }
+        }
+        return tagListForPlayer;
+    }
+
+    public static synchronized List<Tag> getCreatedTagsForPlayer(UUID playerUuid) {
+        List<Tag> tagListForPlayer = Collections.synchronizedList(new ArrayList<>());
+
+        for (Tag tag : serverTagList) {
+            if (tag.owner_uuid.equals(playerUuid)) {
+                tagListForPlayer.add(tag);
+            }
+        }
+        return tagListForPlayer;
+    }
+
+    public static synchronized List<Tag> getServerTagList() {
         return serverTagList;
     }
 
-    public static Map<UUID, List<Integer>> getPlayerUsedTags() {
+    public static synchronized Map<UUID, List<Integer>> getPlayerUsedTags() {
         return playerUsedTags;
+    }
+
+    public static synchronized void clearAll() {
+        serverTagList.clear();
+        playerUsedTags.clear();
     }
 }

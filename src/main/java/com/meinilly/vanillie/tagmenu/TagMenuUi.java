@@ -2,6 +2,7 @@ package com.meinilly.vanillie.tagmenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,17 +15,20 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import com.meinilly.vanillie.Vanillie;
+import com.meinilly.vanillie.commands.tag.TagManager;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
 public class TagMenuUi implements InventoryHolder {
     private final static MiniMessage miniMessage = MiniMessage.miniMessage();
+    private UUID playerUUID;
     private Inventory inventory;
 
     public TagMenuUi(Player player) {
         this.inventory = Bukkit.createInventory(this, 27,
                 miniMessage.deserialize(Vanillie.getGradientText("Tag Menü")));
+        this.playerUUID = player.getUniqueId();
         setupInventory();
     }
 
@@ -43,18 +47,21 @@ public class TagMenuUi implements InventoryHolder {
             inventory.setItem(i * 9 + 8, backgroundItem); // Rechte Spalte
         }
 
+        int serverTagCount = TagManager.getServerTagList().size();
+        int playerTagCreatedCount = TagManager.getPlayerCreatedTagCount(this.playerUUID);
+        int playerTagUsedCount = TagManager.getPlayerUsedTags().get(this.playerUUID).size();
+
         // List Button
-        ItemStack listButton = Vanillie.createCustomHeadItem(
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDVjNmRjMmJiZjUxYzM2Y2ZjNzcxNDU4NWE2YTU2ODNlZjJiMTRkNDdkOGZmNzE0NjU0YTg5M2Y1ZGE2MjIifX19");
+        ItemStack listButton = new ItemStack(Material.FEATHER);
         ItemMeta listItemMeta = listButton.getItemMeta();
         listItemMeta.displayName(miniMessage.deserialize(Vanillie.getGradientText("Zeige alle Tags auf dem Server")));
 
         List<Component> listLore = new ArrayList<>();
         listLore.add(miniMessage.deserialize(Vanillie.getGradientText("Hier kannst du Tags von anderen aktivieren.")));
-        listLore.add(miniMessage.deserialize(Vanillie.getGradientText("Insgesammt existieren 14 Tags.")));
+        listLore.add(miniMessage.deserialize(Vanillie.getGradientText("Insgesammt existieren " + serverTagCount +" Tags.")));
         listItemMeta.lore(listLore);
-
-        listButton.setAmount(14);
+        
+        listButton.setAmount(serverTagCount);
         listButton.setItemMeta(listItemMeta);
 
         inventory.setItem(9 + 2, listButton);
@@ -68,18 +75,18 @@ public class TagMenuUi implements InventoryHolder {
         inventory.setItem(9 + 4, newButton);
 
         // Settings Button
-        ItemStack settingsButton = Vanillie.createCustomHeadItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTdlZDY2ZjVhNzAyMDlkODIxMTY3ZDE1NmZkYmMwY2EzYmYxMWFkNTRlZDVkODZlNzVjMjY1ZjdlNTAyOWVjMSJ9fX0");
+        ItemStack settingsButton = new ItemStack(Material.WRITABLE_BOOK);
         ItemMeta settingsItemMeta = settingsButton.getItemMeta();
         settingsItemMeta
                 .displayName(miniMessage.deserialize(Vanillie.getGradientText("Verwalte bereits existierende Tags")));
 
         List<Component> settingsLore = new ArrayList<>();
         settingsLore.add(miniMessage.deserialize(Vanillie.getGradientText("Hier kannst deine Tags verwalten.")));
-        settingsLore.add(miniMessage.deserialize(Vanillie.getGradientText("Du hast 2 Tags aktiviert.")));
-        settingsLore.add(miniMessage.deserialize(Vanillie.getGradientText("Du hast 5 Tags erstellt.")));
+        settingsLore.add(miniMessage.deserialize(Vanillie.getGradientText("Du hast " + playerTagUsedCount + " Tags aktiviert.")));
+        settingsLore.add(miniMessage.deserialize(Vanillie.getGradientText("Du hast " + playerTagCreatedCount +" Tags erstellt.")));
         settingsItemMeta.lore(settingsLore);
 
-        settingsButton.setAmount(2);
+        settingsButton.setAmount(playerTagUsedCount);
         settingsButton.setItemMeta(settingsItemMeta);
 
         inventory.setItem(9 + 6, settingsButton);

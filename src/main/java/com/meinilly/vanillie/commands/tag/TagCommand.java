@@ -64,6 +64,20 @@ public class TagCommand implements CommandExecutor, TabCompleter {
                 TagMenuUi ui = new TagMenuUi(player);
                 player.openInventory(ui.getInventory());
                 break;
+            case "debug":
+                String[] choices = new String[] { "<red>red test</red>", "<green>green test</green>",
+                        "<blue>blue test</blue>", "<rainbow>oGAYyyyyyyyyyyyyyyy</rainbow>",
+                        "<gradient:yellow:orange:purple:blue>GRADIEEEENT WIE VALORANTT</gradient>" };
+                for (int i = 0; i < 100; i++) {
+                    int choiceI = (int) (Math.random()*choices.length);
+                    String[] choice = new String[] {choices[choiceI]};
+                    newTag(player, args);
+                }
+                player.sendMessage("done");
+                break;
+            case "clear":
+                TagManager.clearAll();
+                break;
             default:
                 showTagUsage(player);
         }
@@ -152,7 +166,8 @@ public class TagCommand implements CommandExecutor, TabCompleter {
                         Vanillie.getGradientText("/tag new <Text>\n - Erstelle einen neuen Tag\n\n") +
                         Vanillie.getGradientText("/tag add <Nummer>\n - Aktiviert einen Tag\n\n") +
                         Vanillie.getGradientText("/tag remove <Nummer>\n - Deaktiviert einen Tag\n\n") +
-                       // Vanillie.getGradientText("/tag up <Nummer>\n - Bewegt einen Tag vor die anderen\n\n") +
+                        // Vanillie.getGradientText("/tag up <Nummer>\n - Bewegt einen Tag vor die
+                        // anderen\n\n") +
                         Vanillie.getGradientText(
                                 "/tag removefully <Nummer>\n - Löscht einen Tag von der Liste\n\n")
                         +
