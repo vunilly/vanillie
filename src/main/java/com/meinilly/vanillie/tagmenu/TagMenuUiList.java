@@ -18,8 +18,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import com.meinilly.vanillie.Vanillie;
-import com.meinilly.vanillie.commands.tag.Tag;
-import com.meinilly.vanillie.commands.tag.TagManager;
+import com.meinilly.vanillie.commands.oldtag.Tag;
+import com.meinilly.vanillie.commands.oldtag.TagManager;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -48,13 +48,13 @@ public class TagMenuUiList implements InventoryHolder {
         List<Tag> tagList;
         if (showTags == 0) {
             tagList = TagManager.getServerTagList();
-            player.sendMessage("ist0");
+            player.sendMessage("Es werden alle Tags angezeigt.");
         } else if(showTags == 1) {
             tagList = TagManager.getCreatedTagsForPlayer(playerUUID);
-            player.sendMessage("ist1");
+            player.sendMessage("Es werden nur die Tags angezeigt, die du erstellt hast.");
         } else {
             tagList = TagManager.getActiveTagsForPlayer(playerUUID);
-            player.sendMessage("ist2");
+            player.sendMessage("Es werden nur die Tags angezeigt, die du aktiviert hast.");
         }
 
         this.maxPage = (int) Math.ceil((double) tagList.size() / pageSize) - 1;
@@ -87,7 +87,14 @@ public class TagMenuUiList implements InventoryHolder {
             inventory.setItem(i * 9 + 8, backgroundItem);
         }
 
-        List<Tag> tagList = TagManager.getServerTagList();
+        List<Tag> tagList;
+        if (showTags == 0) {
+            tagList = TagManager.getServerTagList();
+        } else if(showTags == 1) {
+            tagList = TagManager.getCreatedTagsForPlayer(playerUUID);
+        } else {
+            tagList = TagManager.getActiveTagsForPlayer(playerUUID);
+        }
 
         int pageStart = this.pageSize * this.pageIndex;
         int pageEnd = this.pageSize * (this.pageIndex + 1);
@@ -113,7 +120,7 @@ public class TagMenuUiList implements InventoryHolder {
 
             if (TagManager.doesPlayerHaveTag(playerUUID, tag.getId())) {
                 tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextSecondary("Klicke um den Tag zu ")
-                        + Vanillie.getGradientTextGreen("aktivieren.") + this.pageIndex));
+                        + Vanillie.getGradientTextGreen("aktivieren.")));
             } else {
                 tagLore.add(miniMessage.deserialize(Vanillie.getGradientTextSecondary("Klicke um den Tag zu ")
                         + Vanillie.getImportantText("deaktiveren.")));
@@ -180,7 +187,7 @@ public class TagMenuUiList implements InventoryHolder {
             filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine erstellten anzeigen")));
             filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine aktiven anzeigen")));
 
-            filterButton.lore(filterLore);
+            fitlerMeta.lore(filterLore);
 
             filterButton.setItemMeta(fitlerMeta);
 
@@ -195,7 +202,7 @@ public class TagMenuUiList implements InventoryHolder {
             filterLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Nur meine erstellten anzeigen")));
             filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine aktiven anzeigen")));
 
-            filterButton.lore(filterLore);
+            fitlerMeta.lore(filterLore);
 
             filterButton.setItemMeta(fitlerMeta);
 
@@ -210,7 +217,7 @@ public class TagMenuUiList implements InventoryHolder {
             filterLore.add(miniMessage.deserialize(Vanillie.getGradientText("Nur meine erstellten anzeigen")));
             filterLore.add(miniMessage.deserialize(Vanillie.getGradientTextGreen("Nur meine aktiven anzeigen")));
 
-            filterButton.lore(filterLore);
+            fitlerMeta.lore(filterLore);
 
             filterButton.setItemMeta(fitlerMeta);
 

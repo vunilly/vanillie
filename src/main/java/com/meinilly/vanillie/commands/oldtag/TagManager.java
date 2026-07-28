@@ -1,4 +1,4 @@
-package com.meinilly.vanillie.commands.tag;
+package com.meinilly.vanillie.commands.oldtag;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.meinilly.vanillie.commands.tag.Tag;
+import com.meinilly.vanillie.commands.oldtag.Tag;
 
 public class TagManager {
     private static final List<Tag> serverTagList = Collections.synchronizedList(new ArrayList<>());

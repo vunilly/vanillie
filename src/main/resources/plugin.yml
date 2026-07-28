@@ -8,3 +8,9 @@ commands:
     description: Lets you add tags to your username
     aliases: [prefix]
     usage: /tag
+  textinput:
+    description: "Öffnet ein Anvil GUI zur Texteingabe"
+    usage: "/textinput"
+    aliases:
+      - "ti"
+      - "text"

@@ -13,42 +13,46 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
-import com.meinilly.vanillie.commands.tag.TagCommand;
-import com.meinilly.vanillie.commands.tag.TagManager;
+import com.meinilly.vanillie.commands.oldtag.TagCommandOld;
+import com.meinilly.vanillie.commands.oldtag.TagManager;
 import com.meinilly.vanillie.listeners.ChatListener;
 import com.meinilly.vanillie.listeners.JoinListener;
+import com.meinilly.vanillie.tag.TagCommand;
 import com.meinilly.vanillie.tagmenu.TagMenuUi;
 import com.meinilly.vanillie.tagmenu.TagUiCmd;
-import com.meinilly.vanillie.tagmenu.TagUiListener;
+import com.meinilly.vanillie.utils.Lang;
+import com.meinilly.vanillie.utils.SignUi;
+import com.meinilly.vanillie.utils.Utils;
+import com.meinilly.vanillie.tag.TagMenuListener;
 
 public class Vanillie extends JavaPlugin {
+    private SignUi signUI;
 
     @Override
     public void onEnable() {
         getLogger().info("Vanillie Plugin by meinilly enabled!");
 
+        Lang.init(getDataFolder());
+        Lang.loadLang();
+
         TagManager.init(getDataFolder());
         TagManager.loadTags();
 
-        // getServer().getPluginManager().registerEvents(new JoinListener(), this);
-         getServer().getPluginManager().registerEvents(new ChatListener(), this);
-        getServer().getPluginManager().registerEvents(new TagUiListener(), this);
-        // getServer().getPluginManager().registerEvents(new InventoryClickListener(),
-        // this);
+        this.signUI = new SignUi(this);
 
-        //Old Tag
+        getServer().getPluginManager().registerEvents(new TagMenuListener(), this);
+
         if (getCommand("tag") != null) {
-        getCommand("tag").setExecutor(new TagCommand());
-        getCommand("tag").setTabCompleter(new TagCommand());
+            getCommand("tag").setExecutor(new TagCommand());
         } else {
-        getLogger().severe("Vanillie failed to register the /tag command!");
+            getLogger().severe("Vanillie failed to register the /tag command!");
         }
 
-        // if (getCommand("tag") != null) {
-        //     getCommand("tag").setExecutor(new TagUiCmd());
-        // } else {
-        //     getLogger().severe("Vanillie failed to register the /tag command!");
-        // }
+        //this.getCommand("textinput").setExecutor(new TextinputCommand(this));
+    }
+
+    public SignUi getSignUI() {
+        return signUI;
     }
 
     @Override
@@ -56,6 +60,7 @@ public class Vanillie extends JavaPlugin {
         getLogger().info("Vanillie Plugin by vunilly disabled!");
 
         TagManager.saveTags(getDataFolder());
+        Lang.saveLang(getDataFolder());
     }
 
     public static String getGradientText(String text) {

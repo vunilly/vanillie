@@ -1,4 +1,4 @@
-package com.meinilly.vanillie.commands.tag;
+package com.meinilly.vanillie.commands.oldtag;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import com.meinilly.vanillie.tagmenu.TagMenuUi;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
-public class TagCommand implements CommandExecutor, TabCompleter {
+public class TagCommandOld implements CommandExecutor, TabCompleter {
     private final static MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override

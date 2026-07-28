@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import com.meinilly.vanillie.Vanillie;
-import com.meinilly.vanillie.commands.tag.TagManager;
+import com.meinilly.vanillie.commands.oldtag.TagManager;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;

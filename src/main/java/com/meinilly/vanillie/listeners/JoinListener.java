@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.meinilly.vanillie.Vanillie;
-import com.meinilly.vanillie.commands.tag.TagManager;
+import com.meinilly.vanillie.commands.oldtag.TagManager;
 
 import org.bukkit.event.Listener;
 

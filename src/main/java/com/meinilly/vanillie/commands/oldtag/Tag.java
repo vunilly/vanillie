@@ -1,4 +1,4 @@
-package com.meinilly.vanillie.commands.tag;
+package com.meinilly.vanillie.commands.oldtag;
 
 import java.util.UUID;
 
