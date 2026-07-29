@@ -26,7 +26,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
-public class TagMenuServerlist implements ClickMenu {
+public class TagMenuMy implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
     private final static MiniMessage minimessage = MiniMessage.miniMessage();
@@ -36,23 +36,17 @@ public class TagMenuServerlist implements ClickMenu {
     private static final int PAGE_HEIGHT = 4;
     private static final int ITEMS_PER_PAGE = PAGE_WIDTH * PAGE_HEIGHT;
     private static final int PAGE_START = 9 + 1; // erste Item-Position
-    private int sortMode = 0;
-    private List<Tag> tagList = new ArrayList<>();
 
-    public TagMenuServerlist(Player player, int pageIndex, int sortMode) {
-        this.pageIndex = pageIndex;
-        this.sortMode = sortMode;
+    public TagMenuMy(Player player, int pageIndex) {
         this.playerUUID = player.getUniqueId();
-        if (this.sortMode == 0) {
-            this.tagList = TagManager.getAllTags();
-        } else if (this.sortMode == 1) {
-            this.tagList = TagManager.getTagsByCreator(this.playerUUID);
-        }
-        this.maxPage = (int) Math.ceil((double) tagList.size() / ITEMS_PER_PAGE) - 1;
+
+        this.pageIndex = pageIndex;
+        this.maxPage = (int) Math.ceil((double) TagManager.getAllActiveTagsForPlayer(this.playerUUID).size() / ITEMS_PER_PAGE)
+                - 1;
 
         this.inventory = Bukkit.createInventory(this, 54,
-                Lang.get("menu.tag.server.title", Placeholder.parsed("page", String.valueOf(this.pageIndex + 1)),
-                        Placeholder.parsed("maxpage", String.valueOf(this.maxPage + 1))).getFirst());
+                Lang.get("menu.tag.my.title", Placeholder.parsed("page", String.valueOf(this.pageIndex+1)),
+                        Placeholder.parsed("maxpage", String.valueOf(this.maxPage+1))).getFirst());
 
         setupInventory();
     }
@@ -78,25 +72,16 @@ public class TagMenuServerlist implements ClickMenu {
             inventory.setItem(9 * 5 + 6, nextPageButton);
         }
 
-        if (this.sortMode == 0) {
-            ItemStack myFilterButton = Utils.getUiButton(new ItemStack(Material.LIME_CONCRETE),
-                    Lang.get("menu.tag.server.mine").getFirst(), 1, new ArrayList<>());
-            inventory.setItem(4, myFilterButton);
-        } else if (this.sortMode == 1) {
-            ItemStack allFilterButton = Utils.getUiButton(new ItemStack(Material.WHITE_CONCRETE),
-                    Lang.get("menu.tag.server.mine").getFirst(), 1, new ArrayList<>());
-            inventory.setItem(4, allFilterButton);
-        }
-
         // Farben anzeigen
         int startIndex = pageIndex * ITEMS_PER_PAGE;
-        int tagCount = this.tagList.size();
+
+        List<Integer> allPlayerTags = TagManager.getAllActiveTagsForPlayer(this.playerUUID);
+        int tagCount = allPlayerTags.size();
 
         if (tagCount == 0) {
             ItemStack zeroTagsButton = Utils.getUiButton(Utils.createCustomHeadItem(
                     "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWY3NDU1ZGFlOTY5ODgyM2U0MDg3MjA5Y2M4ZTc2NDMxOWViYzMzNDhmN2ZhYmFhOWE4MTU1OTRmYzY0ZSJ9fX0"),
-                    Lang.get("menu.tag.server.emptyPage.txt").getFirst(), 1,
-                    Lang.get("menu.tag.server.emptyPage.desc"));
+                    Lang.get("menu.tag.my.emptyPage.txt").getFirst(), 1, Lang.get("menu.tag.my.emptyPage.desc"));
             inventory.setItem(9 * 3 + 4, zeroTagsButton);
         } else {
             for (int i = 0; i < ITEMS_PER_PAGE; i++) {
@@ -110,7 +95,8 @@ public class TagMenuServerlist implements ClickMenu {
                     break;
                 }
 
-                Tag tag = tagList.get(tagIndex);
+                Integer tagId = allPlayerTags.get(tagIndex);
+                Tag tag = TagManager.findTagById(tagId);
 
                 if (tag == null) {
                     ItemStack tagButton = Utils.getUiButton(new ItemStack(Material.PAPER),
@@ -125,17 +111,17 @@ public class TagMenuServerlist implements ClickMenu {
 
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(tag.getOwnerUUID());
                 String username = offlinePlayer.getName();
-                int usercount = TagManager.getUsercountById(tag.getId());
+                int usercount = TagManager.getUsercountById(tagIndex);
                 String tagText = tag.getTagString();
 
                 ItemStack tagButton = Utils.getUiButton(Utils.createCustomHeadItem(offlinePlayer),
-                        Lang.get("menu.tag.server.tag.txt",
-                                Placeholder.parsed("tag", tagText)
-                                )
+                        Lang.get("menu.tag.my.tag.txt",
+                                Placeholder.parsed("tag", tagText),
+                                Placeholder.parsed("ownername", username))
                                 .getFirst(),
-                        1, Lang.get("menu.tag.server.tag.desc",
+                        1, Lang.get("menu.tag.my.tag.desc",
                                 Placeholder.parsed("id", String.valueOf(tagIndex)),
-                                
+                                Placeholder.parsed("ownername", username),
                                 Placeholder.parsed("usercount", String.valueOf(usercount))));
 
                 inventory.setItem(inventorySlot, tagButton);
@@ -146,11 +132,6 @@ public class TagMenuServerlist implements ClickMenu {
     @Override
     public void handleClick(int slotId, Player player) {
         switch (slotId) {
-            case (4):
-                TagMenuServerlist tagMenuServerList = new TagMenuServerlist(player, 0, (this.sortMode + 1) % 2);
-                player.openInventory(tagMenuServerList.getInventory());
-                break;
-
             case (9 * 5 + 4):
                 TagMenu tagMenu = new TagMenu(player);
                 player.openInventory(tagMenu.getInventory());
@@ -161,7 +142,7 @@ public class TagMenuServerlist implements ClickMenu {
                 if (pageIndex <= 0) {
                     break;
                 }
-                TagMenuServerlist tagMenuServerlistLastPage = new TagMenuServerlist(player, pageIndex - 1, this.sortMode);
+                TagMenuMy tagMenuServerlistLastPage = new TagMenuMy(player, pageIndex - 1);
                 player.openInventory(tagMenuServerlistLastPage.getInventory());
                 break;
 
@@ -170,17 +151,17 @@ public class TagMenuServerlist implements ClickMenu {
                 if (pageIndex >= maxPage) {
                     break;
                 }
-                TagMenuServerlist tagMenuServerlistNextPage = new TagMenuServerlist(player, pageIndex + 1, this.sortMode);
+                TagMenuMy tagMenuServerlistNextPage = new TagMenuMy(player, pageIndex + 1);
                 player.openInventory(tagMenuServerlistNextPage.getInventory());
                 break;
 
             default:
-                handleColorClick(slotId, player);
+                handleTagClick(slotId, player);
                 break;
         }
     }
 
-    private void handleColorClick(int slotId, Player player) {
+    private void handleTagClick(int slotId, Player player) {
         if (slotId < PAGE_START || slotId > PAGE_START + (9 * PAGE_HEIGHT) - 1 || slotId % 9 == 0 || slotId % 9 == 8)
             return;
 
@@ -189,20 +170,16 @@ public class TagMenuServerlist implements ClickMenu {
 
         int index = row * PAGE_WIDTH + col + ITEMS_PER_PAGE * pageIndex;
 
-        if (index > this.tagList.size() - 1)
+        List<Integer> playersTags = TagManager.getAllActiveTagsForPlayer(this.playerUUID);
+
+        if (index > playersTags.size() - 1)
             return;
 
-        Component result;
-        Tag tag = this.tagList.get(index);
-        if (TagManager.doesPlayerHaveTag(this.playerUUID, tag.getId())) {
-            result = TagManager.deactivateTag(this.playerUUID, index);
-        } else {
-            result = TagManager.activateTag(this.playerUUID, index);
-        }
+        Component result = TagManager.moveTagUp(this.playerUUID, index);
 
-        TagMenuServerlist tagMenuServerlist = new TagMenuServerlist(player, this.pageIndex, this.sortMode);
+        TagMenuMy tagMenuMy = new TagMenuMy(player, pageIndex);
         player.sendMessage(result);
-        player.openInventory(tagMenuServerlist.getInventory());
+        player.openInventory(tagMenuMy.getInventory());
     }
 
     @Override

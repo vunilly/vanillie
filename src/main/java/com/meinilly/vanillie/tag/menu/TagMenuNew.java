@@ -29,6 +29,7 @@ import com.meinilly.vanillie.utils.Utils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
 public class TagMenuNew implements ClickMenu {
     private Inventory inventory;
@@ -50,17 +51,29 @@ public class TagMenuNew implements ClickMenu {
 
         ItemStack listTagsButton = Utils.getUiButton(Utils.createCustomHeadItem(
                 "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzdmZjEzNzc3NTQ1NjNhYjQxYjhhMDMwNWRhYzAzZGU2M2UwMmU1YTM5YTY5NTZhZmQ2Y2NhYmYyOTVhOTZkOCJ9fX0"),
-                Lang.get("menu.tag.new.color").getFirst(), 1, Lang.get("menu.tag.new.color.desc"));
-        inventory.setItem(9 + 2, listTagsButton);
+                Lang.get("menu.tag.new.color.txt").getFirst(), 1, Lang.get("menu.tag.new.color.desc"));
+        inventory.setItem(9 + 1, listTagsButton);
 
         ItemStack textButton = Utils.getUiButton(new ItemStack(Material.OAK_SIGN),
-                Lang.get("menu.tag.new.text").getFirst(), 1, Lang.get("menu.tag.new.text.desc"));
-        inventory.setItem(9 + 4, textButton);
+                Lang.get("menu.tag.new.text.txt").getFirst(), 1, Lang.get("menu.tag.new.text.desc"));
+        inventory.setItem(9 + 3, textButton);
 
-        ItemStack confirmButton = Utils.getUiButton(Utils.createCustomHeadItem(
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTkyZTMxZmZiNTljOTBhYjA4ZmM5ZGMxZmUyNjgwMjAzNWEzYTQ3YzQyZmVlNjM0MjNiY2RiNDI2MmVjYjliNiJ9fX0"),
-                Lang.get("menu.tag.new.save").getFirst(), 1, Lang.get("menu.tag.new.save.desc"));
-        inventory.setItem(9 + 6, confirmButton);
+        ItemStack previewButton = Utils.getUiButton(Utils.createCustomHeadItem(
+                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTlkODU5ZDZiYWYzM2VjY2RlOTk3NTAxYTc2ZThiODNjNDFhYTY4NTliOGU0ZmUxYmUyYWMwOGNjMDQ4NDMifX19"),
+                Lang.get("menu.tag.new.preview.txt").getFirst(), 1, Lang.get("menu.tag.new.preview.descs", Placeholder.parsed("tag", getBuildTag())));
+        inventory.setItem(9 + 5, previewButton);
+
+        if (this.colorList.size() < 1 || this.tagText.isBlank() || this.tagText.isEmpty()) {
+            ItemStack cantConfirmButton = Utils.getUiButton(Utils.createCustomHeadItem(
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODVhMzc1NWE2ZmUwMTlhMTczY2UzYTQzMDcwNDUyZTc2Nzc2OGQ1NzU1OWQwNGI3M2UyMWI5MDNlYWExYmQ4MiJ9fX0="),
+                    Lang.get("menu.tag.new.cantSave.txt").getFirst(), 1, Lang.get("menu.tag.new.cantSave.desc"));
+            inventory.setItem(9 + 7, cantConfirmButton);
+        } else {
+            ItemStack confirmButton = Utils.getUiButton(Utils.createCustomHeadItem(
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTkyZTMxZmZiNTljOTBhYjA4ZmM5ZGMxZmUyNjgwMjAzNWEzYTQ3YzQyZmVlNjM0MjNiY2RiNDI2MmVjYjliNiJ9fX0="),
+                    Lang.get("menu.tag.new.save.txt").getFirst(), 1, Lang.get("menu.tag.new.save.desc"));
+            inventory.setItem(9 + 7, confirmButton);
+        }
 
         ItemStack backButton = Utils.getUiButton(new ItemStack(Material.ARROW),
                 Lang.get("menu.backCancel").getFirst(), 1, new ArrayList<>());
@@ -70,17 +83,24 @@ public class TagMenuNew implements ClickMenu {
     @Override
     public void handleClick(int slotId, Player player) {
         switch (slotId) {
-            case (9 + 2):
-                TagMenuColorBuilder tagMenuColorSelector = new TagMenuColorBuilder(player, this.colorList, this.tagText);
+            case (9 + 1):
+                TagMenuColorBuilder tagMenuColorSelector = new TagMenuColorBuilder(player, this.colorList,
+                        this.tagText);
                 player.openInventory(tagMenuColorSelector.getInventory());
                 break;
 
-            case (9 + 4):
+            case (9 + 3):
                 openInput(player, this.colorList);
                 break;
 
-            case (9 + 6):
-                TagManager.createTag(player.getUniqueId(), null);
+            case (9 + 7):
+                if (this.colorList.size() < 1 || this.tagText.isBlank() || this.tagText.isEmpty()) {
+                    player.sendMessage(Lang.get("msg.tag.new.cantSave").getFirst());
+                } else {
+                    Component result = TagManager.createTag(player.getUniqueId(), getBuildTag());
+                    player.sendMessage(result);
+                    player.closeInventory();
+                }
                 break;
 
             case (9 * 2 + 4):
@@ -95,24 +115,55 @@ public class TagMenuNew implements ClickMenu {
 
     public static void openInput(Player player, ArrayList<String> colorHexCodeList) {
         player.closeInventory();
-        
+
         Vanillie plugin = (Vanillie) org.bukkit.plugin.java.JavaPlugin.getPlugin(Vanillie.class);
-    
+
         // Öffne das SignUI
         plugin.getSignUI().open(player, new Component[] {
-            Component.text(""),
-            Component.text("^^^^^^^^^^"),
-            Component.text("Text in die erste"),
-            Component.text("Zeile eingeben")
+                Component.text(""),
+                Component.text("^^^^^^^^^^"),
+                Component.text(Lang.getString("menu.signUi.0")),
+                Component.text(Lang.getString("menu.signUi.1"))
         }, (inputLines) -> {
-            String text = inputLines[0]; 
-            if (text != null && !text.isBlank()) {
-                player.sendMessage(Component.text("Tag gespeichert: " + text));
+            String text = inputLines[0];
+            if (text != null) {
+                if (text.isBlank()) {
+                    player.sendMessage(Lang.get("msg.tag.new.didntSaveText").getFirst());
+                } else {
+                    player.sendMessage(Lang.get("msg.tag.new.savedText", Placeholder.parsed("text", text)).getFirst());
+                }
             }
-            
+
             TagMenuNew t = new TagMenuNew(player, colorHexCodeList, text);
             player.openInventory(t.getInventory());
         });
+    }
+
+    public String getBuildTag() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<!italic><!b><b>");
+        if (this.colorList.size() == 0) {
+            // no colors
+            builder.append(this.tagText);
+        } else if (this.colorList.size() >= 2) {
+            // more then 2 colors = gradient
+            builder.append("<gradient");
+            for (String hexColor : this.colorList) {
+                builder.append(":");
+                builder.append(hexColor);
+            }
+            builder.append(">");
+            builder.append(this.tagText);
+            builder.append("</gradient>");
+        } else {
+            // single color
+            builder.append("<c:");
+            builder.append(this.colorList.get(0));
+            builder.append(">");
+            builder.append(this.tagText);
+            builder.append("</c>");
+        }
+        return builder.toString();
     }
 
     @Override

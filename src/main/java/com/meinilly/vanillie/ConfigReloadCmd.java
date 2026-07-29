@@ -1,6 +1,4 @@
-package com.meinilly.vanillie.tag;
-
-import java.util.UUID;
+package com.meinilly.vanillie;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,11 +6,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import com.meinilly.vanillie.tag.TagManager;
 import com.meinilly.vanillie.tag.menu.TagMenu;
 import com.meinilly.vanillie.utils.Lang;
 
-public class TagCommand implements CommandExecutor {
-
+public class ConfigReloadCmd implements CommandExecutor {
     @Override
     public boolean onCommand(
         @NotNull CommandSender sender,
@@ -24,21 +22,23 @@ public class TagCommand implements CommandExecutor {
             sender.sendMessage(Lang.getString("msg.onlyPlayersAllowed"));
             return true;
         }
-
-        String[] red = {"ff", "30", "20", "30", "49", "0", "a0", "b0", "c0", "90"};
         
-        for (int i = 0; i < 32; i++) {
-            TagManager.createTag(UUID.randomUUID(), "<color:" + red[i%9] + red[i%3] +  red[i%5] + ">TAG"+String.valueOf(i)+"</color>");
+        if (!(sender.isOp())) {
+            sender.sendMessage(Lang.getString("msg.needOp"));
+            return true;
         }
-        //}
 
         if (args.length >= 1) {
             sender.sendMessage(Lang.getString("msg.tooManyParams"));
             return true;
         }
 
-        TagMenu tagMenu = new TagMenu(player);
-        player.openInventory(tagMenu.getInventory());
+        TagManager.clearData();
+        TagManager.loadData();
+        Lang.clearData();
+        Lang.loadLang();
+
+        sender.sendMessage(Lang.getString("msg.confReloaded"));
 
         return true;
     }

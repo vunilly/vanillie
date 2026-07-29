@@ -19,6 +19,10 @@ public class Lang {
     public static final Map<String, List<String>> LANG = new LinkedHashMap<>();
     private static File dataFile;
 
+    public static void clearData() {
+        LANG.clear();
+    }
+
     public static void loadLang() {
         LANG.clear();
 
@@ -46,7 +50,7 @@ public class Lang {
         }
     }
 
-    public static void saveLang(File pluginFolder) {
+    public static void saveLang() {
         FileConfiguration config = new YamlConfiguration();
 
         for (Map.Entry<String, List<String>> entry : LANG.entrySet()) {
@@ -86,19 +90,31 @@ public class Lang {
         List<String> lines = LANG.get(key);
 
         if (lines == null) {
-            // Key im Cache als "missing" markieren, damit er nicht bei jedem Aufruf erneut gespeichert wird
-            String defaultValue = "Key missing: " + key;
+            String defaultValue = key;
             LANG.put(key, List.of(defaultValue));
             
-            // Key in die Datei schreiben, ohne andere zu überschreiben
             saveMissingKey(key, defaultValue);
 
-            return List.of(MINI_MESSAGE.deserialize("Key missing: " + key));
+            return List.of(MINI_MESSAGE.deserialize(key));
         }
 
         return lines.stream()
                 .map(line -> MINI_MESSAGE.deserialize(line, resolvers))
                 .toList();
+    }
+
+    public static String getString(String key) {
+        List<String> lines = LANG.get(key);
+
+        if (lines == null) {
+            String defaulValue = key;
+
+            saveMissingKey(key, defaulValue);
+
+            return key;
+        }
+
+        return lines.getFirst();
     }
 
     private static void saveMissingKey(String key, String value) {

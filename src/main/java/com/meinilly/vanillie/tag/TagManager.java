@@ -1,6 +1,7 @@
 package com.meinilly.vanillie.tag;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,22 @@ public class TagManager {
     private static final List<Tag> allTags = Collections.synchronizedList(new ArrayList<>());
     private static final Map<UUID, List<Integer>> usedTags = new ConcurrentHashMap<>();
     private static File dataFile;
+
+    public static void clearData() {
+        FileConfiguration config = YamlConfiguration.loadConfiguration(dataFile);
+
+        config.set("tags", null);
+        config.set("players", null);
+
+        allTags.clear();
+        usedTags.clear();
+
+        try {
+            config.save(dataFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void loadData() {
         FileConfiguration config = YamlConfiguration.loadConfiguration(dataFile);
@@ -80,12 +97,30 @@ public class TagManager {
         }
     }
 
-    public void setup(File pluginFolder) {
+    public static void init(File pluginFolder) {
         dataFile = new File(pluginFolder, "tag_config.yml");
+    }
+
+    public static synchronized List<Integer> getAllActiveTagsForPlayer(UUID playerUuid) {
+        List<Integer> playersTags = usedTags.get(playerUuid);
+        if (playersTags == null) {
+            playersTags = new ArrayList<>();
+        }
+        return playersTags;
     }
 
     public static synchronized List<Tag> getAllTags() {
         return allTags;
+    }
+
+    public static synchronized List<Tag> getTagsByCreator(UUID playerUuid) {
+        List<Tag> tagList = new ArrayList<>();
+        for (Tag tag : allTags) {
+            if (tag.getOwnerUUID().equals(playerUuid)) {
+                tagList.add(tag);
+            }
+        }
+        return tagList;
     }
 
     public static synchronized Map<UUID, List<Integer>> getUsedTags() {
@@ -93,7 +128,7 @@ public class TagManager {
     }
 
     private static synchronized int findNewId() {
-        int id = 1;
+        int id = 0;
 
         while (true) {
             boolean exists = false;
@@ -122,6 +157,7 @@ public class TagManager {
         Tag newTag = new Tag(newId, ownerUuid, text);
 
         allTags.add(newTag);
+        activateTag(ownerUuid, newId);
 
         return Lang.get("msg.tag.created").getFirst();
     }
@@ -131,7 +167,7 @@ public class TagManager {
             return Lang.get("msg.tag.invalidId").getFirst();
 
         // sollte nie null sein, weil wir es oben gecheckt haben
-        Tag toDeleteTag = getTagById(tagId);
+        Tag toDeleteTag = findTagById(tagId);
         if (toDeleteTag == null) {
             throw new IllegalStateException("Tag exists in allTags list, but somehow doesnt! This cant happen.");
         }
@@ -201,13 +237,17 @@ public class TagManager {
         return Lang.get("msg.tag.moved").getFirst();
     }
 
-    private static synchronized Tag getTagById(int tagId) {
+    public static synchronized Tag findTagById(int tagId) {
         for (Tag tag : allTags) {
             if (tag.getId() == tagId) {
                 return tag;
             }
         }
         return null;
+    }
+
+    public static synchronized int getUsercountById(int tagId) {
+        return -1;
     }
 
     public static synchronized boolean isTagIdValid(int tagId) {

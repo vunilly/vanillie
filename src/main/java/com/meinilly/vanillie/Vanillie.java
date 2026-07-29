@@ -13,13 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
-import com.meinilly.vanillie.commands.oldtag.TagCommandOld;
-import com.meinilly.vanillie.commands.oldtag.TagManager;
-import com.meinilly.vanillie.listeners.ChatListener;
-import com.meinilly.vanillie.listeners.JoinListener;
 import com.meinilly.vanillie.tag.TagCommand;
-import com.meinilly.vanillie.tagmenu.TagMenuUi;
-import com.meinilly.vanillie.tagmenu.TagUiCmd;
+import com.meinilly.vanillie.tag.TagManager;
 import com.meinilly.vanillie.utils.Lang;
 import com.meinilly.vanillie.utils.SignUi;
 import com.meinilly.vanillie.utils.Utils;
@@ -36,7 +31,7 @@ public class Vanillie extends JavaPlugin {
         Lang.loadLang();
 
         TagManager.init(getDataFolder());
-        TagManager.loadTags();
+        TagManager.loadData();
 
         this.signUI = new SignUi(this);
 
@@ -46,6 +41,12 @@ public class Vanillie extends JavaPlugin {
             getCommand("tag").setExecutor(new TagCommand());
         } else {
             getLogger().severe("Vanillie failed to register the /tag command!");
+        }
+
+        if (getCommand("confreload") != null) {
+            getCommand("confreload").setExecutor(new ConfigReloadCmd());
+        } else {
+            getLogger().severe("Vanillie failed to register the /confreload command!");
         }
 
         //this.getCommand("textinput").setExecutor(new TextinputCommand(this));
@@ -59,8 +60,8 @@ public class Vanillie extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Vanillie Plugin by vunilly disabled!");
 
-        TagManager.saveTags(getDataFolder());
-        Lang.saveLang(getDataFolder());
+        TagManager.saveData();
+        Lang.saveLang();
     }
 
     public static String getGradientText(String text) {

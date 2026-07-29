@@ -35,6 +35,11 @@ public class SignUi implements Listener {
     public void open(Player player, Component[] lines, Consumer<String[]> onFinish) {
         Position virtualPos = player.getLocation();
 
+        if (virtualPos.blockY() > 320 || virtualPos.blockY() < -64) {
+            player.sendMessage(Lang.get("msg.signUi.posOOB").getFirst());
+            return;
+        }
+
         Sign virtualSign = createVirtualSign(lines);
 
         Location loc = new Location(player.getWorld(), 
@@ -46,11 +51,11 @@ public class SignUi implements Listener {
         player.sendBlockUpdate(loc, virtualSign);
 
         // Die Location speichern wir jetzt in der Session ab
-        activeSessions.put(player.getUniqueId(), new SignSession(virtualSign, loc, onFinish));
+        activeSessions.put(player.getUniqueId(), new SignSession(loc, onFinish));
         try {
             player.openVirtualSign(virtualPos, Side.FRONT);
         } catch (Exception e) {
-            Bukkit.getLogger().severe("[Vanillie] Fehler beim Öffnen von SignUi: " + e.getMessage());
+            Bukkit.getLogger().severe("[Vanillie] Error opening SignUi: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -75,7 +80,7 @@ public class SignUi implements Listener {
         Player player = event.getPlayer();
         
         if (player == null) {
-            Bukkit.getLogger().warning("[Vanillie] Player ist null in UncheckedSignChangeEvent in SignUi!");
+            Bukkit.getLogger().warning("[Vanillie] Player is null in UncheckedSignChangeEvent in SignUi!");
             return;
         }
         
@@ -123,12 +128,10 @@ public class SignUi implements Listener {
     }
 
     private static class SignSession {
-        final Sign virtualSign;
         final Location location;
         final Consumer<String[]> onFinish;
 
-        SignSession(Sign virtualSign, Location location, Consumer<String[]> onFinish) {
-            this.virtualSign = virtualSign;
+        SignSession(Location location, Consumer<String[]> onFinish) {
             this.location = location;
             this.onFinish = onFinish;
         }

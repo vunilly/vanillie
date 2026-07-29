@@ -25,7 +25,7 @@ public class TagMenu implements ClickMenu {
     private final static MiniMessage minimessage = MiniMessage.miniMessage();
 
     public TagMenu(Player player) {
-        this.inventory = Bukkit.createInventory(this, 27, Lang.get("menu.tag.tile").getFirst());
+        this.inventory = Bukkit.createInventory(this, 27, Lang.get("menu.tag.title").getFirst());
         this.playerUUID = player.getUniqueId();
         setupInventory();
     }
@@ -34,25 +34,36 @@ public class TagMenu implements ClickMenu {
         Utils.decorateInventory(Material.BLUE_STAINED_GLASS_PANE, inventory, 3);
 
         ItemStack listTagsButton = Utils.getUiButton(new ItemStack(Material.WRITABLE_BOOK),
-                Lang.get("menu.tag.server").getFirst(), 1, Lang.get("menu.tag.server.desc"));
+                Lang.get("menu.tag.server.txt").getFirst(), 1, Lang.get("menu.tag.server.desc"));
         inventory.setItem(9 + 2, listTagsButton);
 
         ItemStack newTagButton = Utils.getUiButton(new ItemStack(Material.NETHER_STAR),
-                Lang.get("menu.tag.new").getFirst(), 1, Lang.get("menu.tag.new.desc"));
+                Lang.get("menu.tag.new.txt").getFirst(), 1, Lang.get("menu.tag.new.desc"));
         inventory.setItem(9 + 4, newTagButton);
 
         ItemStack myTagsButton = Utils.getUiButton(new ItemStack(Material.COMPARATOR),
-                Lang.get("menu.tag.my").getFirst(), 1, Lang.get("menu.tag.my.desc"));
+                Lang.get("menu.tag.my.txt").getFirst(), 1, Lang.get("menu.tag.my.desc"));
         inventory.setItem(9 + 6, myTagsButton);
     }
 
     @Override
     public void handleClick(int slotId, Player player) {
         switch (slotId) {
+            case (9 + 2):
+                TagMenuServerlist tagMenuServerList = new TagMenuServerlist(player, 0, 0);
+                player.openInventory(tagMenuServerList.getInventory());
+                break;
+
             case (9 + 4):
                 TagMenuNew tagMenuNew = new TagMenuNew(player, new ArrayList<>(), "");
                 player.openInventory(tagMenuNew.getInventory());
                 break;
+
+            case (9 + 6):
+                TagMenuMy tagMenuMy = new TagMenuMy(player, 0);
+                player.openInventory(tagMenuMy.getInventory());
+                break;
+
             default:
                 break;
         }

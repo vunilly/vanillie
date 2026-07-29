@@ -12,9 +12,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.InventoryHolder;
 
-import com.meinilly.vanillie.tagmenu.TagMenuUi;
-import com.meinilly.vanillie.tagmenu.TagMenuUiList;
-import com.meinilly.vanillie.tagmenu.TagMenuUiNew;
 import com.meinilly.vanillie.utils.ClickMenu;
 import com.meinilly.vanillie.utils.ColorList;
 import com.meinilly.vanillie.tag.menu.TagMenu;

@@ -40,7 +40,9 @@ public class ColorList implements ClickMenu {
         this.maxPage = (int) Math.ceil((double) Colors.COLORS.size() / ITEMS_PER_PAGE) - 1;
 
         this.inventory = Bukkit.createInventory(this, 54,
-                Lang.get("menu.colorList.title", Placeholder.parsed("page", String.valueOf(this.pageIndex)), Placeholder.parsed("maxPage", String.valueOf(this.maxPage))
+                Lang.get("menu.colorList.title", 
+                Placeholder.parsed("page", String.valueOf(this.pageIndex+1)), 
+                Placeholder.parsed("maxpage", String.valueOf(this.maxPage+1))
                 ).getFirst());
         this.playerUUID = player.getUniqueId();
         setupInventory();
@@ -56,14 +58,14 @@ public class ColorList implements ClickMenu {
         if (pageIndex > 0) {
             ItemStack lastPageButton = Utils.getUiButton(Utils.createCustomHeadItem(
                     "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWFlNzg0NTFiZjI2Y2Y0OWZkNWY1NGNkOGYyYjM3Y2QyNWM5MmU1Y2E3NjI5OGIzNjM0Y2I1NDFlOWFkODkifX19"),
-                    Lang.get("menu.page.last").getFirst(), 1, new ArrayList<>());
+                    Lang.get("menu.page.last").getFirst(), pageIndex, new ArrayList<>());
             inventory.setItem(9 * 5 + 2, lastPageButton);
         }
 
         if (pageIndex < maxPage) {
             ItemStack nextPageButton = Utils.getUiButton(Utils.createCustomHeadItem(
                     "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTE3ZjM2NjZkM2NlZGZhZTU3Nzc4Yzc4MjMwZDQ4MGM3MTlmZDVmNjVmZmEyYWQzMjU1Mzg1ZTQzM2I4NmUifX19"),
-                    Lang.get("menu.page.next").getFirst(), 1, new ArrayList<>());
+                    Lang.get("menu.page.next").getFirst(), pageIndex + 2, new ArrayList<>());
             inventory.setItem(9 * 5 + 6, nextPageButton);
         }
 
@@ -81,7 +83,7 @@ public class ColorList implements ClickMenu {
             // Erster Slot auf jeder Seite für Custom-Farbe
             if (pageIndex == 0 && i == 0) {
                 ItemStack customColorButton = Utils.getUiButton(new ItemStack(Material.NETHER_STAR),
-                        Lang.get("menu.colorList.createColor").getFirst(), 1, Lang.get("menu.colorList.createColor.desc"));
+                        Lang.get("menu.colorList.createColor.txt").getFirst(), 1, Lang.get("menu.colorList.createColor.desc"));
                 inventory.setItem(inventorySlot, customColorButton);
             }
             // Normale Farben
@@ -96,8 +98,11 @@ public class ColorList implements ClickMenu {
                     break;
 
                 ItemStack colorButton = Utils.getUiButton(Utils.createCustomHeadItem(entry.getValue()),
-                        Lang.get("menu.colorList.color").getFirst(),
-                        1, Lang.get("menu.colorList.color.desc"));
+                        Lang.get("menu.colorList.color.txt",
+                            Placeholder.parsed("hexcode", entry.getKey())
+                        ).getFirst(),
+                        1, Lang.get("menu.colorList.color.desc", 
+                        Placeholder.parsed("hexcode", entry.getKey())));
 
                 inventory.setItem(inventorySlot, colorButton);
             }
@@ -138,7 +143,7 @@ public class ColorList implements ClickMenu {
     }
 
     private void handleColorClick(int slotId, Player player) {
-        if (slotId < PAGE_START || slotId > PAGE_START + 9 * PAGE_HEIGHT || slotId % 9 == 0 || slotId % 9 == 8)
+        if (slotId < PAGE_START || slotId > PAGE_START + (9 * PAGE_HEIGHT) - 1 || slotId % 9 == 0 || slotId % 9 == 8)
             return;
 
         int row = (slotId - PAGE_START) / 9;
