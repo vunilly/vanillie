@@ -12,12 +12,19 @@ repositories {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+
+    maven {
+        name = "placeholderapi"
+        url = 'https://repo.extendedclip.com/releases/'
+    }
+
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:26.1.2.build.+"
     implementation "net.kyori:adventure-text-minimessage:4.17.0"
     implementation 'com.mojang:brigadier:1.0.18'
+    compileOnly 'me.clip:placeholderapi:2.12.3'
 }
 
 java {

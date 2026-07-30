@@ -1,6 +1,6 @@
 name: Vanillie
 version: 1.0
-main: com.meinilly.vanillie.Vanillie
+main: com.vunilly.vanillie.Vanillie
 api-version: '26.1'
 
 commands:
@@ -8,7 +8,7 @@ commands:
     description: Lets you add tags to your username
     aliases: [prefix]
     usage: /tag
-  confreload:
-    description: Reloads the configuration files without destroying updated data
-    aliases: [rlc]
-    usage: /reload
+  vanillieconfig:
+    description: Configuration commands
+    aliases: [vconfig, vconf]
+    usage: /vanillieconfig <reload|save>
