@@ -24,7 +24,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class TagMenuNew implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
     public ArrayList<String> colorList = new ArrayList<>();
     public String tagText = "";
 
@@ -39,10 +38,10 @@ public class TagMenuNew implements ClickMenu {
     public void setupInventory() {
         Utils.decorateInventory(Material.LIGHT_BLUE_STAINED_GLASS_PANE, inventory, 3);
 
-        ItemStack listTagsButton = Utils.getUiButton(Utils.createCustomHeadItem(
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzdmZjEzNzc3NTQ1NjNhYjQxYjhhMDMwNWRhYzAzZGU2M2UwMmU1YTM5YTY5NTZhZmQ2Y2NhYmYyOTVhOTZkOCJ9fX0"),
+        ItemStack colorButton = Utils.getUiButton(Utils.createCustomHeadItem(
+                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWY3YzU0ZmY3ODYyMTE2ZTY1YTE0MzY2MjBiOTFhZjU4YjUyYWIxNzE1MmExODM3MTgwZjM0NTgwMzJmNTcwMiJ9fX0"),
                 Lang.get("menu.tag.new.color.txt").getFirst(), 1, Lang.get("menu.tag.new.color.desc"));
-        inventory.setItem(9 + 1, listTagsButton);
+        inventory.setItem(9 + 1, colorButton);
 
         ItemStack textButton = Utils.getUiButton(new ItemStack(Material.PALE_OAK_SIGN),
                 Lang.get("menu.tag.new.text.txt").getFirst(), 1, Lang.get("menu.tag.new.text.desc"));

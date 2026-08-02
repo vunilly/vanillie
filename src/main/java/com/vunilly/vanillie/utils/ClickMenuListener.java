@@ -1,4 +1,4 @@
-package com.vunilly.vanillie.tag;
+package com.vunilly.vanillie.utils;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
@@ -12,16 +12,16 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.InventoryHolder;
 
+import com.vunilly.vanillie.pvp.PvpMenu;
 import com.vunilly.vanillie.tag.menu.TagMenu;
 import com.vunilly.vanillie.tag.menu.TagMenuColorBuilder;
 import com.vunilly.vanillie.tag.menu.TagMenuNew;
-import com.vunilly.vanillie.utils.ClickMenu;
-import com.vunilly.vanillie.utils.ColorList;
+import com.vunilly.vanillie.vote.VoteMenu;
 
-public class TagMenuListener implements Listener {
+public class ClickMenuListener implements Listener {
     private boolean isMenu(InventoryHolder holder) {
         return holder instanceof TagMenu || holder instanceof TagMenuColorBuilder || holder instanceof ColorList
-                || holder instanceof ColorList || holder instanceof TagMenuNew;
+                || holder instanceof ColorList || holder instanceof TagMenuNew || holder instanceof PvpMenu || holder instanceof VoteMenu;
     }
 
     @EventHandler(ignoreCancelled = true)

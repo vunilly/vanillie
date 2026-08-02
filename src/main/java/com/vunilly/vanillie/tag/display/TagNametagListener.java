@@ -36,8 +36,13 @@ public class TagNametagListener implements Listener {
             }
             
             team.addPlayer(player);
-            team.prefix(tags);
-            team.suffix(Component.empty());
+            if (TagManager.getAllActiveTagsForPlayer(player.getUniqueId()).size() == 0) {
+                team.prefix(tags);
+            } else {
+                team.prefix(tags.append(Component.text(" ")));
+            }
+            
+            team.suffix(Component.text(" "));
         }
     }
 }

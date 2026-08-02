@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -23,7 +24,10 @@ public class Utils {
     public static ItemStack getUiButton(ItemStack itemStack, Component title, int count, List<Component> description) {
         ItemMeta buttonMeta = itemStack.getItemMeta();
 
+        buttonMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        buttonMeta.setAttributeModifiers(null);
         buttonMeta.displayName(title);
+        buttonMeta.lore(null);
         buttonMeta.lore(description);
 
         itemStack.setItemMeta(buttonMeta);
@@ -52,6 +56,7 @@ public class Utils {
         SkullMeta meta = (SkullMeta) head.getItemMeta();
 
         meta.setOwningPlayer(player);
+        meta.lore(null);
         head.setItemMeta(meta);
 
         return head;

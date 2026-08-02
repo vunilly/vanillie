@@ -22,7 +22,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class TagMenu implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
 
     public TagMenu(Player player) {
         this.inventory = Bukkit.createInventory(this, 27, Lang.get("menu.tag.title").getFirst());

@@ -23,7 +23,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class TagMenuColorBuilder implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
     private static final int PAGE_WIDTH = 7;
     private static final int PAGE_HEIGHT = 3;
     private static final int ITEMS_PER_PAGE = PAGE_WIDTH * PAGE_HEIGHT;

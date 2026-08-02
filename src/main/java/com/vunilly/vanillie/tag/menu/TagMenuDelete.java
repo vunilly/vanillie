@@ -23,7 +23,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class TagMenuDelete implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
     private int tagIdToDelete;
 
     public TagMenuDelete(Player player, int tagId) {

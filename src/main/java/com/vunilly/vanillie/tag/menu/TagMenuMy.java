@@ -26,7 +26,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class TagMenuMy implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
     public int pageIndex;
     public int maxPage;
     private static final int PAGE_WIDTH = 7;
@@ -109,7 +108,7 @@ public class TagMenuMy implements ClickMenu {
                 OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(tag.getOwnerUUID());
                 String username = offlinePlayer.getName() != null ? offlinePlayer.getName() : Lang.getString("str.playerNameFail");
 
-                int usercount = TagManager.getUsercountById(tagIndex);
+                int usercount = TagManager.getUsercountById(tagId);
                 String tagText = tag.getTagString();
 
                 ItemStack tagButton = Utils.getUiButton(Utils.getPlayerHead(username),

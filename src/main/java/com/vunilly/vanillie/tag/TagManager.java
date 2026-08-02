@@ -14,6 +14,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import com.vunilly.vanillie.Vanillie;
 import com.vunilly.vanillie.tag.display.TagNametagListener;
 import com.vunilly.vanillie.utils.Lang;
 
@@ -23,7 +24,6 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
 public class TagManager {
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
     private static final List<Tag> allTags = Collections.synchronizedList(new ArrayList<>());
     private static final Map<UUID, List<Integer>> usedTags = new ConcurrentHashMap<>();
     private static File dataFile;
@@ -154,7 +154,8 @@ public class TagManager {
 
         if (TagManager.getAllActiveTagsForPlayer(ownerUuid).size() >= TagManager.activeLimit) {
             allTags.add(newTag);
-            return Lang.get("msg.tag.createdButNotActivated", Placeholder.parsed("tag", newTag.getTagString()), Placeholder.parsed("limit", String.valueOf(TagManager.activeLimit))).getFirst();
+            return Lang.get("msg.tag.createdButNotActivated", Placeholder.parsed("tag", newTag.getTagString()),
+                    Placeholder.parsed("limit", String.valueOf(TagManager.activeLimit))).getFirst();
         } else {
             allTags.add(newTag);
             activateTag(ownerUuid, newId);
@@ -196,12 +197,16 @@ public class TagManager {
         List<Integer> tagsOfPlayer = getTagsOfPlayerOrCreate(addToWho);
 
         tagsOfPlayer.add(tagId);
-        
-        Player player = Bukkit.getPlayer(addToWho);
-        TagNametagListener.updateNametag(player);
 
-        return Lang.get("msg.tag.activated", Placeholder.parsed("tag", 
-        findTagById(tagId).getTagString())).getFirst();
+        Player player = Bukkit.getPlayer(addToWho);
+        if (player != null) {
+            TagNametagListener.updateNametag(player);
+
+            return Lang.get("msg.tag.activated", Placeholder.parsed("tag",
+                    findTagById(tagId).getTagString())).getFirst();
+        } else {
+            return Lang.get("msg.unknownError").getFirst();
+        }
     }
 
     public static synchronized Component deactivateTag(UUID removeFromWho, int tagId) {
@@ -217,8 +222,8 @@ public class TagManager {
         Player player = Bukkit.getPlayer(removeFromWho);
         TagNametagListener.updateNametag(player);
 
-        return Lang.get("msg.tag.deactivated", Placeholder.parsed("tag", 
-        findTagById(tagId).getTagString())).getFirst();
+        return Lang.get("msg.tag.deactivated", Placeholder.parsed("tag",
+                findTagById(tagId).getTagString())).getFirst();
     }
 
     public static synchronized Component moveTagUp(UUID playerUuid, int tagIndex) {
@@ -324,7 +329,7 @@ public class TagManager {
         for (Integer tagId : playerTagIds) {
             Tag tag = findTagById(tagId);
             if (tag != null) {
-                tagComponents.add(minimessage.deserialize(tag.getTagString()));
+                tagComponents.add(Vanillie.minimessage.deserialize(tag.getTagString()));
             }
         }
 

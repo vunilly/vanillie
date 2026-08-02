@@ -22,7 +22,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 public class ColorList implements ClickMenu {
     private Inventory inventory;
     private UUID playerUUID;
-    private final static MiniMessage minimessage = MiniMessage.miniMessage();
     public int pageIndex;
     public int maxPage;
     private static final int PAGE_WIDTH = 7;
