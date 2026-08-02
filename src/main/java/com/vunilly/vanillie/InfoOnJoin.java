@@ -70,9 +70,6 @@ public class InfoOnJoin implements Listener {
                         /pvp - PVP an/aus
                         <b>NEUES:</b>
                         /size - Spielergröße anpassen (pvp fair)
-
-                        -Masha,
-                        Servermanagement
                         """));
 
         book.setItemMeta(meta);
