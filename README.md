@@ -35,6 +35,12 @@ Players can change their ingame size
 - You are able to decrease your size in cm
 - Cannot be changed when player has pvp cooldown
 
+## /twitch - connect your twitch channel
+Players can set a twitch username as theirs
+- Players will receive a special tag if they are live on twitch
+- A message will be broadcastet when they are live
+- Players have to rejoin
+
 ## Other stuff
 - /vanillieconifg - `/vconf <clearconfig|reloadconfig|saveconfig|resetbook>` (resetbook shows a book on first join, resetbook allows you to show it again if you change it, which requirese a recompilation)
 - /vanillie - Shows a book with info on the plugin

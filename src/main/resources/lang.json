@@ -1,6 +1,13 @@
 {
     "lang": {
         "menu": {
+            "twitch": {
+                "title" : "<!i><b><gradient:#7f6bff:#c4abff>Twitch Namen eistellen",
+                "select" : "<!i><b><gradient:#7f6bff:#c4abff>Klicke um deinen Nutzernamen auszuwählen",
+                "signUi": {
+                    "1" : "1&2 Zeile eingeben"
+                }
+            },
             "size": {
                 "title" : "<!i><b><gradient:#7f6bff:#c4abff>Ändere deine Größe",
                 "minus" : "<!i><b><gradient:#ff52dc:#c4abff>Klicke um kleiner zu werden",
@@ -226,6 +233,11 @@
             "unknownParam": "<gradient:#ff52dc:#c4abff>Unbekannte(r) Parameter.",
             "playerJoined": " <c:#fff23d>ist dem Spiel beigetreten.",
             "playerLeft": " <c:#fff23d>hat das Spiel verlassen.",
+            "twitch" : {
+                "isLive" : "<color:#9146FF><b><player></b> streamt auf Twitch unter <b>ttv/<twitchname></b>",
+                "savedText" : "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt. (Du musst rejoinen!)",
+                "didntSaveText" : "<gradient:#ff52dc:#c4abff>Twitch account name wurde nicht gespeichert."
+            },
             "size" : {
                 "current" : "<gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß (<incm> Centimeter).",
                 "changed" : "<gradient:#9187db:#5c64d1>Deine Größe wurde auf <new> Blöcke geändert (<incm> Centimeter).",

@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import com.vunilly.vanillie.pvp.PvpManager;
 import com.vunilly.vanillie.pvp.PvpMenu;
 import com.vunilly.vanillie.tag.TagManager;
+import com.vunilly.vanillie.twitch.TwitchManager;
 import com.vunilly.vanillie.utils.Lang;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -52,6 +53,7 @@ public class VanillieCommand implements CommandExecutor, TabCompleter {
             case "clearconfig":
                 TagManager.clearData();
                 PvpManager.clearData();
+                TwitchManager.clearData();
 
                 sender.sendMessage(Lang.get("msg.confCleared").getFirst());
                 break;
@@ -63,6 +65,9 @@ public class VanillieCommand implements CommandExecutor, TabCompleter {
                 PvpManager.clearData();
                 PvpManager.loadData();
 
+                TwitchManager.clearData();
+                TwitchManager.loadData();
+
                 Lang.clearData();
                 Lang.loadLang();
 
@@ -72,17 +77,8 @@ public class VanillieCommand implements CommandExecutor, TabCompleter {
             case "saveconfig":
                 TagManager.saveData();
                 PvpManager.saveData();
+                TwitchManager.saveData();
                 sender.sendMessage(Lang.get("msg.confSaved").getFirst());
-                break;
-
-            case "resetbook":
-                Vanillie plugin = (Vanillie) org.bukkit.plugin.java.JavaPlugin.getPlugin(Vanillie.class);
-                NamespacedKey key = new NamespacedKey(plugin, "info_book_version");
-
-                for (Player playerInList : Bukkit.getOnlinePlayers()) {
-                    playerInList.getPersistentDataContainer().remove(key);
-                }
-                sender.sendMessage(Lang.get("msg.bookReset").getFirst());
                 break;
 
             default:
@@ -111,12 +107,9 @@ public class VanillieCommand implements CommandExecutor, TabCompleter {
             }
 
             if ("clearconfig".startsWith(args[0].toLowerCase())) {
-                completions.add("resetbook");
+                completions.add("clearconfig");
             }
 
-            if ("resetbook".startsWith(args[0].toLowerCase())) {
-                completions.add("resetbook");
-            }
         }
 
         return completions;

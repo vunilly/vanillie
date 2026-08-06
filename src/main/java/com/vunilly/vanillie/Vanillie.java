@@ -2,14 +2,16 @@ package com.vunilly.vanillie;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.vunilly.vanillie.display.JoinLeaveListener;
+import com.vunilly.vanillie.display.ChatListener;
 import com.vunilly.vanillie.pvp.PvpCommand;
 import com.vunilly.vanillie.pvp.PvpListener;
 import com.vunilly.vanillie.pvp.PvpManager;
 import com.vunilly.vanillie.size.SizeCommand;
 import com.vunilly.vanillie.tag.TagCommand;
 import com.vunilly.vanillie.tag.TagManager;
-import com.vunilly.vanillie.tag.display.TagChatListener;
-import com.vunilly.vanillie.tag.display.TagJoinLeaveListener;
+import com.vunilly.vanillie.twitch.TwitchCommand;
+import com.vunilly.vanillie.twitch.TwitchManager;
 import com.vunilly.vanillie.utils.Lang;
 import com.vunilly.vanillie.utils.SignUi;
 import com.vunilly.vanillie.vote.VoteCommand;
@@ -32,12 +34,11 @@ public class Vanillie extends JavaPlugin {
 
 
         getServer().getPluginManager().registerEvents(new ClickMenuListener(), this);
-        getServer().getPluginManager().registerEvents(new InfoOnJoin(), this);
         
         TagManager.init(getDataFolder());
         TagManager.loadData();
-        getServer().getPluginManager().registerEvents(new TagChatListener(), this);
-        getServer().getPluginManager().registerEvents(new TagJoinLeaveListener(), this);
+        getServer().getPluginManager().registerEvents(new ChatListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinLeaveListener(), this);
         if (getCommand("tag") != null) {
             getCommand("tag").setExecutor(new TagCommand());
         } else {
@@ -55,11 +56,21 @@ public class Vanillie extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PvpListener(), this);
 
 
+        TwitchManager.init(getDataFolder());
+        TwitchManager.loadData();
+        if (getCommand("twitch") != null) {
+            getCommand("twitch").setExecutor(new TwitchCommand());
+        } else {
+            getLogger().severe("Vanillie failed to register the /twitch command!");
+        }
+
+
         if (getCommand("vote") != null) {
             getCommand("vote").setExecutor(new VoteCommand());
         } else {
             getLogger().severe("Vanillie failed to register the /vote command!");
         }
+
 
         if (getCommand("size") != null) {
             getCommand("size").setExecutor(new SizeCommand());

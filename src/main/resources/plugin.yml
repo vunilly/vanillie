@@ -20,6 +20,10 @@ commands:
     description: Change your ingame size
     aliases: []
     usage: /size
+  twitch:
+    description: Lets you connect your Twitch channel and show a notification when you are live
+    aliases: [ttv, stream]
+    usage: /twitch
   vanillieconf:
     description: Plugin stuff you most likely don't care about
     aliases: [vconf]

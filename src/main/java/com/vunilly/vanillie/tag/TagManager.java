@@ -15,7 +15,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import com.vunilly.vanillie.Vanillie;
-import com.vunilly.vanillie.tag.display.TagNametagListener;
+import com.vunilly.vanillie.display.NametagListener;
 import com.vunilly.vanillie.utils.Lang;
 
 import net.kyori.adventure.text.Component;
@@ -200,7 +200,7 @@ public class TagManager {
 
         Player player = Bukkit.getPlayer(addToWho);
         if (player != null) {
-            TagNametagListener.updateNametag(player);
+            NametagListener.updateNametag(player);
 
             return Lang.get("msg.tag.activated", Placeholder.parsed("tag",
                     findTagById(tagId).getTagString())).getFirst();
@@ -220,7 +220,7 @@ public class TagManager {
         tagsOfPlayer.remove(Integer.valueOf(tagId));
 
         Player player = Bukkit.getPlayer(removeFromWho);
-        TagNametagListener.updateNametag(player);
+        NametagListener.updateNametag(player);
 
         return Lang.get("msg.tag.deactivated", Placeholder.parsed("tag",
                 findTagById(tagId).getTagString())).getFirst();
@@ -233,6 +233,9 @@ public class TagManager {
             return Lang.get("msg.tag.cannotMove").getFirst();
         }
 
+        Player player = Bukkit.getPlayer(playerUuid);
+        NametagListener.updateNametag(player);
+
         Collections.swap(tagsOfPlayer, tagIndex, tagIndex - 1);
 
         return Lang.get("msg.tag.moved").getFirst();
@@ -244,6 +247,9 @@ public class TagManager {
         if (tagIndex < 0 || tagIndex >= tagsOfPlayer.size() - 1) {
             return Lang.get("msg.tag.cannotMove").getFirst();
         }
+
+        Player player = Bukkit.getPlayer(playerUuid);
+        NametagListener.updateNametag(player);
 
         Collections.swap(tagsOfPlayer, tagIndex, tagIndex + 1);
 
