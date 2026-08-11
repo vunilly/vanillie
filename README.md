@@ -2,7 +2,7 @@
 
 Vanillie is a personal project for a minecraft server.
 
-Plugin version: v.1.1
+Plugin version: v.1.3
 
 # Features
 
@@ -45,6 +45,7 @@ Players can set a twitch username as theirs
 - /vanillieconifg - `/vconf <clearconfig|reloadconfig|saveconfig|resetbook>` (resetbook shows a book on first join, resetbook allows you to show it again if you change it, which requirese a recompilation)
 - /vanillie - Shows a book with info on the plugin
 - Join messages will be changed if you have tag active
+- Enderman cannot pick up blocks
 
 # Language
 The plugin (by default) comes with a German language pack and no english translation. However, after starting the plugin, in the plugin folder there is a file called `lang.json` which you can edit to your liking. Then use `/vconf reloadconfig` (FIRST USE `/vconf saveconfig` TO SAVE ALL OTHER DATA!)

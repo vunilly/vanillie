@@ -1,5 +1,6 @@
 package com.vunilly.vanillie;
 
+import com.vunilly.vanillie.enderman.EndermanListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.vunilly.vanillie.display.JoinLeaveListener;
@@ -34,6 +35,8 @@ public class Vanillie extends JavaPlugin {
 
 
         getServer().getPluginManager().registerEvents(new ClickMenuListener(), this);
+
+        getServer().getPluginManager().registerEvents(new EndermanListener(), this);
         
         TagManager.init(getDataFolder());
         TagManager.loadData();
