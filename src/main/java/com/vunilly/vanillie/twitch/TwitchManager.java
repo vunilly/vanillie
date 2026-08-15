@@ -8,9 +8,11 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.vunilly.vanillie.display.NametagListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 public class TwitchManager {
     private static HashMap<UUID, String> twitchUsernames = new HashMap<>();
@@ -74,9 +76,12 @@ public class TwitchManager {
     }
 
     public static void setTwitchUsername(UUID playerUUID, String twitchUsername) {
+        invalidateCache(playerUUID);
         twitchUsernames.put(playerUUID, twitchUsername);
-        // Cache invalidieren wenn Username gesetzt wird
         statusCache.remove(playerUUID);
+        Player player = Bukkit.getPlayer(playerUUID);
+        if (player == null) return;
+        NametagListener.updateNametag(player);
     }
 
     public static String getTwitchUsername(UUID playerUUID) {

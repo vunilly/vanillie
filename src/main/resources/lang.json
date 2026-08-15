@@ -235,7 +235,7 @@
             "playerLeft": " <c:#fff23d>hat das Spiel verlassen.",
             "twitch" : {
                 "isLive" : "<color:#9146FF><b><player></b> streamt auf Twitch unter <b>ttv/<twitchname></b>",
-                "savedText" : "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt. (Du musst rejoinen!)",
+                "savedText" : "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt.",
                 "didntSaveText" : "<gradient:#ff52dc:#c4abff>Twitch account name wurde nicht gespeichert."
             },
             "size" : {
