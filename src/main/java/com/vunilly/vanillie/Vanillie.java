@@ -1,6 +1,7 @@
 package com.vunilly.vanillie;
 
 import com.vunilly.vanillie.enderman.EndermanListener;
+import com.vunilly.vanillie.restart.RestartCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.vunilly.vanillie.display.JoinLeaveListener;
@@ -93,6 +94,12 @@ public class Vanillie extends JavaPlugin {
             getCommand("vanillie").setExecutor(new VanillieInfoCommand());
         } else {
             getLogger().severe("Vanillie failed to register the /vanillie command!");
+        }
+
+        if (getCommand("schedulerestart") != null) {
+            getCommand("schedulerestart").setExecutor(new RestartCommand());
+        } else {
+            getLogger().severe("Vanillie failed to register the /schedulerestart command!");
         }
     }
 

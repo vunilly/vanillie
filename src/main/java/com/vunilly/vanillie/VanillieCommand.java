@@ -45,7 +45,7 @@ public class VanillieCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length > 1) {
-            player.sendMessage(Lang.get("msg.tooManyParamsOkay", Placeholder.parsed("command", command.getName())).getFirst());
+            sender.sendMessage(Lang.get("msg.tooManyParamsOkay", Placeholder.parsed("command", command.getName())).getFirst());
             return true;
         }
 

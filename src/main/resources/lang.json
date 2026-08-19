@@ -233,6 +233,14 @@
             "unknownParam": "<gradient:#ff52dc:#c4abff>Unbekannte(r) Parameter.",
             "playerJoined": " <c:#fff23d>ist dem Spiel beigetreten.",
             "playerLeft": " <c:#fff23d>hat das Spiel verlassen.",
+            "restart": {
+                "scheduled": "\n\n\n<gradient:#fff23d:#ffbfa0><u>⚠<b> SERVER BENACHRICHTIGUNG </b>⚠</u>\n\n⏻ Der Server wird um <gradient:#ff52dc:#c4abff><time></gradient> neu gestartet.\nGrund: <gradient:#ff52dc:#c4abff><reason></gradient>\nDer Vorgang sollte weniger als 5 Minuten dauern.\n\nEs wird zu <gradient:#ff52dc:#c4abff>keinem Datenverlust</gradient> kommen. Dennoch pausieren Sie bitte ressourcenintensive Vorgänge (z. B. Chunk-Generierung).\n\n<u><b>                                     </b></u>",
+                "starting": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Beginne Neustartvorgang...",
+                "saving": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Speichere Ressource...",
+                "bye": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Ressourcen wurden gespeichert. Kappe Verbindungen, bis gleich!",
+                "kicked": "\n\n<gradient:#fff23d:#ffbfa0><b>⚠ Du wurdest durch einen automatischen Neustart gekickt.\n\n<gradient:#ff52dc:#c4abff>Bitte warte kurz (max. 5 Minuten) und verbinde dich erneut.</gradient></gradient>",
+                "bossbar": "<c:#fff23d>Geplanter Server Neustart"
+            },
             "twitch" : {
                 "isLive" : "<color:#9146FF><b><player></b> streamt auf Twitch unter <b>ttv/<twitchname></b>",
                 "savedText" : "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt.",

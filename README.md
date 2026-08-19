@@ -2,7 +2,7 @@
 
 Vanillie is a personal project for a minecraft server.
 
-Plugin version: v.1.3
+Plugin version: v.1.5
 
 # Features
 
@@ -44,6 +44,7 @@ Players can set a twitch username as theirs
 ## Other stuff
 - /vanillieconifg - `/vconf <clearconfig|reloadconfig|saveconfig|resetbook>` (resetbook shows a book on first join, resetbook allows you to show it again if you change it, which requirese a recompilation)
 - /vanillie - Shows a book with info on the plugin
+- /schedulerestart - Schedules a shutdown
 - Join messages will be changed if you have tag active
 - Enderman cannot pick up blocks
 
