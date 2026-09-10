@@ -1,22 +1,143 @@
 {
     "lang": {
         "menu": {
+            "settings": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Vanillie Plugin Einstellungen",
+                "tag": {
+                    "maxPlayer": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Maximale erstellte Tag Anzahl: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die maximale Anzahl an Tags die jeder Spieler erstellen kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    },
+                    "maxActive": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Maximale aktive Tag Anzahl: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die maximale Anzahl an Tags die jeder Spieler aktiviert haben kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    }
+                },
+                "vote": {
+                    "enableDaytimes": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Tageszeiten Voting: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können Nacht oder Tag voten.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    },
+                    "enableWeather": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Wetter Voting: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können Regen, Gewitter oder klares Wetter voten.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    }
+                },
+                "enableTwitch": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Twitch Command: <state>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Spieler können ihren Twitch-Accountnamen verbinden",
+                        "<!i><gradient:#9187db:#5c64d1>Wenn dieser Kanal live ist steht das beim joinen",
+                        "<!i><gradient:#9187db:#5c64d1>im chat und neben dem Namen.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
+                },
+                "size": {
+                    "minSize": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Kleinste Spieler Größe: <min>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die kleinste größe die ein Spieler sein kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um den Wert zu erhöhen",
+                            "<!i><gradient:#7f6bff:#c4abff>> Rechtsklick<gradient:#9187db:#5c64d1> um den Wert zu verringern"
+                        ]
+                    },
+                    "maxSize": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Größte Spieler Größe: <max>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die größte Größe die ein Spieler sein kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um den Wert zu erhöhen",
+                            "<!i><gradient:#7f6bff:#c4abff>> Rechtsklick<gradient:#9187db:#5c64d1> um den Wert zu verringern"
+                        ]
+                    }
+                },
+                "enableEnderman": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Enderman Block Verbot: <state>",
+                    "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Enderman können keine Blöcke platzieren.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                },
+                "enableEnd": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>End: <state>",
+                    "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Das End kann nicht betritten werden.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                },
+                "pvp": {
+                    "enabled": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>PvP Toggle: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können PvP in einen Friedensmodus wechseln,",
+                            "<!i><gradient:#9187db:#5c64d1>in dem Sie nicht angegriffen werden können.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    },
+                    "timer": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>PvP Timer: <zeit> Sekunden",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Der Timer der Spieler nicht in den Friendensmodus wechseln lässt.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    }
+                },
+                "xpEnabled": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Befüllbare XP Flaschen: <state>",
+                    "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können XP in flaschen speichern",
+                            " in dem Sie leere Flaschen rechtsklicken.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                },
+                "biomeWandEnabled": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Biome Wand Item und Crafting Rezept: <state>",
+                    "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können das Biom in einem bestimmten Radius verändern.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                }
+            },
             "twitch": {
-                "title" : "<!i><b><gradient:#7f6bff:#c4abff>Twitch Namen eistellen",
-                "select" : "<!i><b><gradient:#7f6bff:#c4abff>Klicke um deinen Nutzernamen auszuwählen",
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Twitch Namen eistellen",
+                "select": "<!i><b><gradient:#7f6bff:#c4abff>Klicke um deinen Nutzernamen auszuwählen",
                 "signUi": {
-                    "1" : "1&2 Zeile eingeben"
+                    "1": "1&2 Zeile eingeben"
                 }
             },
             "size": {
-                "title" : "<!i><b><gradient:#7f6bff:#c4abff>Ändere deine Größe",
-                "minus" : "<!i><b><gradient:#ff52dc:#c4abff>Klicke um kleiner zu werden",
-                "plus" : "<!i><b><gradient:#ff52dc:#c4abff>Klicke um größer zu werden",
-                "minuscm" : "<!i><b><gradient:#ff52dc:#c4abff>Klicke um 1cm kleiner zu werden",
-                "pluscm" : "<!i><b><gradient:#ff52dc:#c4abff>Klicke um 1cm größer zu werden",
-                "current" : {
-                    "txt" : "<!i><b><gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß",
-                    "desc" : "<!i><b><gradient:#9187db:#5c64d1>Das sind <incm> Centimeter"
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Ändere deine Größe",
+                "minus": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um kleiner zu werden",
+                "plus": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um größer zu werden",
+                "minuscm": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um 1cm kleiner zu werden",
+                "pluscm": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um 1cm größer zu werden",
+                "current": {
+                    "txt": "<!i><b><gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß",
+                    "desc": "<!i><b><gradient:#9187db:#5c64d1>Das sind <incm> Centimeter"
                 }
             },
             "vote": {
@@ -93,8 +214,7 @@
                         ]
                     },
                     "signUi": {
-                        "0": "Tag Text ganz",
-                        "1": "oben eingeben"
+                        "1": "1&2 Zeile eingeben"
                     }
                 },
                 "my": {
@@ -227,7 +347,7 @@
             "needOp": "<gradient:#ff52dc:#c4abff>Du brauchst OP um diesen Befehl zu verwenden.",
             "onlyPlayersAllowed": "<gradient:#ff52dc:#c4abff>Nur Spieler*innen können diesen Befehl verwenden!",
             "tooManyParams": "<gradient:#ff52dc:#c4abff>Dieser Befehl benötigt keine weiteren Parameter!",
-            "tooManyParamsOkay" : "<gradient:#ff52dc:#c4abff>Du musst nur \"/<command>\" eingeben btw :)",
+            "tooManyParamsOkay": "<gradient:#ff52dc:#c4abff>Du musst nur \"/<command>\" eingeben btw :)",
             "tooFewParams": "<gradient:#ff52dc:#c4abff>Dieser Befehl benötigt mehr Parameter!",
             "incorrectParams": "<gradient:#ff52dc:#c4abff>Fehlerhafte(r) Parameter.",
             "unknownParam": "<gradient:#ff52dc:#c4abff>Unbekannte(r) Parameter.",
@@ -241,18 +361,18 @@
                 "kicked": "\n\n<gradient:#fff23d:#ffbfa0><b>⚠ Du wurdest durch einen automatischen Neustart gekickt.\n\n<gradient:#ff52dc:#c4abff>Bitte warte kurz (max. 5 Minuten) und verbinde dich erneut.</gradient></gradient>",
                 "bossbar": "<c:#fff23d>Geplanter Server Neustart"
             },
-            "twitch" : {
-                "isLive" : "<color:#9146FF><b><player></b> streamt auf Twitch unter <b>ttv/<twitchname></b>",
-                "savedText" : "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt.",
-                "didntSaveText" : "<gradient:#ff52dc:#c4abff>Twitch account name wurde nicht gespeichert."
+            "twitch": {
+                "isLive": "<color:#9146FF><b><player></b> streamt auf Twitch unter <b>ttv/<twitchname></b>",
+                "savedText": "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt.",
+                "didntSaveText": "<gradient:#ff52dc:#c4abff>Twitch account name wurde nicht gespeichert."
             },
-            "size" : {
-                "current" : "<gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß (<incm> Centimeter).",
-                "changed" : "<gradient:#9187db:#5c64d1>Deine Größe wurde auf <new> Blöcke geändert (<incm> Centimeter).",
-                "error" : "<gradient:#ff52dc:#c4abff>Ein Fehler ist augetreten.",
-                "minus" : "<gradient:#ff52dc:#c4abff>Du bist schon so klein wie möglich!",
-                "plus" : "<gradient:#ff52dc:#c4abff>Du bist schon so groß wie möglich!",
-                "cantChange" : "<gradient:#ff52dc:#c4abff>Du kannst deine Größe nicht ändern, während du im Kampfmodus bist."
+            "size": {
+                "current": "<gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß (<incm> Centimeter).",
+                "changed": "<gradient:#9187db:#5c64d1>Deine Größe wurde auf <new> Blöcke geändert (<incm> Centimeter).",
+                "error": "<gradient:#ff52dc:#c4abff>Ein Fehler ist augetreten.",
+                "minus": "<gradient:#ff52dc:#c4abff>Du bist schon so klein wie möglich!",
+                "plus": "<gradient:#ff52dc:#c4abff>Du bist schon so groß wie möglich!",
+                "cantChange": "<gradient:#ff52dc:#c4abff>Du kannst deine Größe nicht ändern, während du im Kampfmodus bist."
             },
             "vote": {
                 "type": {
@@ -297,7 +417,7 @@
                 "combatEnded": "<gradient:#ff52dc:#c4abff>Kampf Cooldown ist nun aus.",
                 "combatSecs": "<gradient:#ff52dc:#c4abff>Kampf Cooldown: <secs>s",
                 "cooldown": "<gradient:#ff52dc:#c4abff>Du hast noch <secs> Sekunden PvP Cooldown!",
-                "tooLow" : {
+                "tooLow": {
                     "them": "<gradient:#ff52dc:#c4abff>Spieler*in <player> ist zu klein um fair PvP zu spielen!",
                     "you": "<gradient:#ff52dc:#c4abff>Du bist zu klein um fair PvP zu spielen!"
                 },
@@ -338,19 +458,21 @@
             },
             "confReloaded": "<gradient:#9187db:#5c64d1>✔ Konfiguration neugeladen!",
             "confSaved": "<gradient:#9187db:#5c64d1>✔ Konfiguration gespeichert!",
-            "confCleared" : "<gradient:#9187db:#5c64d1>✔ Konfiguration gelöscht (nutze reloadconf um sie wiederherzustellen)!",
+            "confCleared": "<gradient:#9187db:#5c64d1>✔ Konfiguration gelöscht (nutze reloadconf um sie wiederherzustellen)!",
             "bookReset": "<gradient:#9187db:#5c64d1> Update Buch wurde resettet (Rejoine um es anzuzeigen).",
             "colorList": {
                 "savedColor": "<gradient:#ff52dc:#c4abff>Hex Farbe wurde gespeichert.",
                 "didntSaveColor": "<gradient:#ff52dc:#c4abff>Farbe wurde nicht gespeichert.",
                 "invalidHex": "<gradient:#ff52dc:#c4abff>Der HEX-Code ist fehlerhaft. Der Hex Code muss 7 Zeichen lang sein, mit 6 folgenden Zeichen. Diese Zeichen können nur 0-9 und A-F sein."
             },
-            "unknownError" : "<gradient:#ff52dc:#c4abff>Ein unbekannter Fehler ist aufgetreten. Das sollte nie passieren!"
+            "unknownError": "<gradient:#ff52dc:#c4abff>Ein unbekannter Fehler ist aufgetreten. Das sollte nie passieren!"
         },
         "str": {
             "playerNameFail": "*Unbekannte*r Spieler*in",
             "clickHereYes": "[✔ Ja]",
-            "clickHereNo": "[❌ Nein]"
+            "clickHereNo": "[❌ Nein]",
+            "on": "an",
+            "off": "aus"
         }
     }
 }

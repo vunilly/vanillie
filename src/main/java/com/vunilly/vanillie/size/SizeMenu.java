@@ -51,13 +51,13 @@ public class SizeMenu implements ClickMenu {
 
         if (((double) (heightCm - 1) / 180.0) >= MIN_SIZE) {
             ItemStack sizeMinusCmButton = Utils.getUiButton(Utils.createCustomHeadItem(
-                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjBkMWRmODA0NmYwYjVkOTM0YzNlMDU3OThlYWNmZWVhNmQ3YjU5NWRiZTI2ZGViZjdkYjlhY2M4YzRmYTc5OCJ9fX0"),
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM4NTJiZjYxNmYzMWVkNjdjMzdkZTRiMGJhYTJjNWY4ZDhmY2E4MmU3MmRiY2FmY2JhNjY5NTZhODFjNCJ9fX0"),
                     Lang.get("menu.size.minuscm").getFirst(), 1, new ArrayList<>());
             inventory.setItem(9 + 1, sizeMinusCmButton);
         }
         if (current - 0.1 >= MIN_SIZE) {
             ItemStack sizeMinusButton = Utils.getUiButton(Utils.createCustomHeadItem(
-                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjBkMWRmODA0NmYwYjVkOTM0YzNlMDU3OThlYWNmZWVhNmQ3YjU5NWRiZTI2ZGViZjdkYjlhY2M4YzRmYTc5OCJ9fX0"),
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM4NTJiZjYxNmYzMWVkNjdjMzdkZTRiMGJhYTJjNWY4ZDhmY2E4MmU3MmRiY2FmY2JhNjY5NTZhODFjNCJ9fX0"),
                     Lang.get("menu.size.minus").getFirst(), 1, new ArrayList<>());
             inventory.setItem(9 + 2, sizeMinusButton);
         }
@@ -72,14 +72,14 @@ public class SizeMenu implements ClickMenu {
 
         if (((double) (heightCm + 1) / 180.0) <= MAX_SIZE) {
             ItemStack sizePlusCmButton = Utils.getUiButton(Utils.createCustomHeadItem(
-                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJmYzIzODY2NTIzY2FhYThhOTUzNDU2NjEyN2E2ZjgzODlhZjNlNzZiOGUzYzMzYzI0NzNjYmE2ODg5YzQifX19"),
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjIyMWRhNDQxOGJkM2JmYjQyZWI2NGQyYWI0MjljNjFkZWNiOGY0YmY3ZDRjZmI3N2ExNjJiZTNkY2IwYjkyNyJ9fX0"),
                     Lang.get("menu.size.pluscm").getFirst(), 1, new ArrayList<>());
             inventory.setItem(9 + 7, sizePlusCmButton);
         }
         
         if (current + 0.1 <= MAX_SIZE) {
             ItemStack sizePlusButton = Utils.getUiButton(Utils.createCustomHeadItem(
-                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJmYzIzODY2NTIzY2FhYThhOTUzNDU2NjEyN2E2ZjgzODlhZjNlNzZiOGUzYzMzYzI0NzNjYmE2ODg5YzQifX19"),
+                    "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjIyMWRhNDQxOGJkM2JmYjQyZWI2NGQyYWI0MjljNjFkZWNiOGY0YmY3ZDRjZmI3N2ExNjJiZTNkY2IwYjkyNyJ9fX0"),
                     Lang.get("menu.size.plus").getFirst(), 1, new ArrayList<>());
             inventory.setItem(9 + 6, sizePlusButton);
         }

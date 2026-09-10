@@ -110,11 +110,11 @@ public class TagMenuNew implements ClickMenu {
         // Öffne das SignUI
         plugin.getSignUI().open(player, new Component[] {
                 Component.text(""),
+                Component.text(""),
                 Component.text("^^^^^^^^^^"),
-                Component.text(Lang.getString("menu.tag.new.signUi.0")),
                 Component.text(Lang.getString("menu.tag.new.signUi.1"))
         }, (inputLines) -> {
-            String text = inputLines[0];
+            String text = inputLines[0] + inputLines[1];
             if (text != null) {
                 if (text.isBlank()) {
                     player.sendMessage(Lang.get("msg.tag.new.didntSaveText").getFirst());

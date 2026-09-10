@@ -1,5 +1,5 @@
 name: Vanillie
-version: 1.5
+version: 1.6
 main: com.vunilly.vanillie.Vanillie
 api-version: '26.1'
 
@@ -24,14 +24,21 @@ commands:
     description: Lets you connect your Twitch channel and show a notification when you are live
     aliases: [ttv, stream]
     usage: /twitch
+  color:
+    description: Lets you change your name color
+    aliases: [namecolor, color]
   vanillieconf:
-    description: Plugin stuff you most likely don't care about
+    description: Manage config files
     aliases: [vconf]
-    usage: /vanillie <reloadconfig|saveconfig|clearconfig|resetbook>
+    usage: /vanillie <reloadconfig|saveconfig|clearconfig>
   vanillie:
     description: Plugin Info
     aliases: [vinfo, v]
     usage: /vanillieinfo
+  vanilliesettings:
+    description: Plugin Settings
+    aliases: [vpref, vsettings]
+    usage: /vanilliesettings
   schedulerestart:
     description: Manage restarting your server
     aliases: [vrestart]
