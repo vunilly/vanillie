@@ -24,13 +24,10 @@ commands:
     description: Lets you connect your Twitch channel and show a notification when you are live
     aliases: [ttv, stream]
     usage: /twitch
-  color:
-    description: Lets you change your name color
-    aliases: [namecolor, color]
   vanillieconf:
-    description: Manage config files
+    description: Plugin config command
     aliases: [vconf]
-    usage: /vanillie <reloadconfig|saveconfig|clearconfig>
+    usage: /vanillieconf <reloadconfig|saveconfig|clearconfig>
   vanillie:
     description: Plugin Info
     aliases: [vinfo, v]

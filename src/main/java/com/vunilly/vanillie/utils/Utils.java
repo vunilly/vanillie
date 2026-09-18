@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
@@ -116,5 +120,31 @@ public class Utils {
             inventory.setItem(8 + j * (9), decorations.get(counter % decorations.size()));
             counter++;
         }
+    }
+
+    public static Location getHandLocation(Player player, boolean isMainHand) {
+        Location loc = player.getEyeLocation();
+        
+        boolean isRightHand = isMainHand 
+                ? (player.getMainHand() == MainHand.RIGHT) 
+                : (player.getMainHand() == MainHand.LEFT);
+
+        Vector direction = loc.getDirection().normalize();
+
+        Vector right = new Vector(-direction.getZ(), 0, direction.getX()).normalize();
+        
+        if (!isRightHand) {
+            right.multiply(-1);
+        }
+
+        double rightOffset = 0.3; // Distance to the side
+        double forwardOffset = 0.6; // Distance in front of the eyes
+        double downOffset = 0.55;    // Distance below the eyes
+
+        loc.add(right.multiply(rightOffset));
+        loc.add(direction.multiply(forwardOffset));
+        loc.subtract(0, downOffset, 0);
+
+        return loc;
     }
 }

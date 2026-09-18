@@ -17,7 +17,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
 public class JoinLeaveListener implements Listener {
-
+    
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -41,7 +41,7 @@ public class JoinLeaveListener implements Listener {
                 Bukkit.broadcast(Lang
                         .get("msg.twitch.isLive",
                                 Placeholder.parsed("twitchname", TwitchManager.getTwitchUsername(player.getUniqueId())),
-                                        Placeholder.parsed("player", player.getName()))
+                                Placeholder.parsed("player", player.getName()))
                         .getFirst());
             }
         });

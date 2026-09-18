@@ -5,9 +5,16 @@ import com.vunilly.vanillie.restart.RestartCommand;
 import com.vunilly.vanillie.settings.SettingsCommand;
 import com.vunilly.vanillie.settings.SettingsManager;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.vunilly.vanillie.display.JoinLeaveListener;
+import com.vunilly.vanillie.biome.BiomeWand;
+import com.vunilly.vanillie.biome.BiomeWandListener;
+import com.vunilly.vanillie.biome.RecipeListener;
 import com.vunilly.vanillie.display.ChatListener;
 import com.vunilly.vanillie.pvp.PvpCommand;
 import com.vunilly.vanillie.pvp.PvpListener;
@@ -84,6 +91,11 @@ public class Vanillie extends JavaPlugin {
         } else {
             getLogger().severe("Vanillie failed to register the /size command!");
         }
+
+        BiomeWand biomeWand = new BiomeWand();
+        Bukkit.addRecipe(biomeWand.getRecipe(this));
+        getServer().getPluginManager().registerEvents(new RecipeListener(), this);
+        getServer().getPluginManager().registerEvents(new BiomeWandListener(new BiomeWand()), this);
 
 
         if (getCommand("vanillieconf") != null) {

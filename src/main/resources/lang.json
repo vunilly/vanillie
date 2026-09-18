@@ -214,7 +214,8 @@
                         ]
                     },
                     "signUi": {
-                        "1": "1&2 Zeile eingeben"
+                        "0": "Tag Text ganz",
+                        "1": "oben eingeben"
                     }
                 },
                 "my": {
@@ -466,6 +467,17 @@
                 "invalidHex": "<gradient:#ff52dc:#c4abff>Der HEX-Code ist fehlerhaft. Der Hex Code muss 7 Zeichen lang sein, mit 6 folgenden Zeichen. Diese Zeichen können nur 0-9 und A-F sein."
             },
             "unknownError": "<gradient:#ff52dc:#c4abff>Ein unbekannter Fehler ist aufgetreten. Das sollte nie passieren!"
+        },
+        "items": {
+            "biomewand": {
+                "name": "Biomstab",
+                "desc": [
+                    "Ein magischer Zauberstab der den Staub",
+                    "von Biomen mit Linksklick einsaugt oder abgibgt.",
+                    "Rechtsklicke um ein Biom auszuwählen.",
+                    "Reparierbar mit Amethysten. Verzauberbar."
+                ]
+            }
         },
         "str": {
             "playerNameFail": "*Unbekannte*r Spieler*in",
