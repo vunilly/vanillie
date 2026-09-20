@@ -40,7 +40,7 @@ public class VanillieInfoCommand implements CommandExecutor {
                 meta.addPages(
                                 Vanillie.minimessage.deserialize("""
                                                 <b>Vanillie Plugin</b>
-                                                Version: v1.6
+                                                Version: v1.7
                                                 <b><i>For LUXSMP</i></b>
                                                 Developed by vunilly
 

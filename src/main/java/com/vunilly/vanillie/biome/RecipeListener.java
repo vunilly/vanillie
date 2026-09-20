@@ -10,15 +10,14 @@ import com.vunilly.vanillie.Vanillie;
 
 public class RecipeListener implements Listener {
 
-    private final NamespacedKey recipeKey;
+    private final BiomeWand biomeWand;
 
-    public RecipeListener() {
-        Vanillie plugin = (Vanillie) org.bukkit.plugin.java.JavaPlugin.getPlugin(Vanillie.class);
-        this.recipeKey = new NamespacedKey(plugin, "vanillie_biomewand");
+    public RecipeListener(BiomeWand biomeWand) {
+        this.biomeWand = biomeWand;
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        event.getPlayer().discoverRecipe(this.recipeKey);
+        event.getPlayer().discoverRecipe(biomeWand.getRecipeKey());
     }
 }

@@ -46,9 +46,8 @@ public class BiomeWand {
     }
 
     public ShapedRecipe getRecipe(Vanillie plugin) {
-        NamespacedKey key = this.recipeKey;
 
-        ShapedRecipe recipe = new ShapedRecipe(key, createItem());
+        ShapedRecipe recipe = new ShapedRecipe(this.recipeKey, createItem());
 
         recipe.shape(
             "  A",
@@ -70,5 +69,9 @@ public class BiomeWand {
 
         ItemMeta meta = item.getItemMeta();
         return meta.getPersistentDataContainer().has(itemKey, PersistentDataType.BOOLEAN);
+    }
+
+    public NamespacedKey getRecipeKey() {
+        return recipeKey;
     }
 }

@@ -26,6 +26,10 @@ import net.kyori.adventure.text.Component;
 
 public class Utils {
     public static ItemStack getUiButton(ItemStack itemStack, Component title, int count, List<Component> description) {
+        return getUiButton(itemStack, title, count, description, false);
+    }
+
+    public static ItemStack getUiButton(ItemStack itemStack, Component title, int count, List<Component> description, boolean enchanted) {
         ItemMeta buttonMeta = itemStack.getItemMeta();
 
         buttonMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
@@ -33,6 +37,7 @@ public class Utils {
         buttonMeta.displayName(title);
         buttonMeta.lore(null);
         buttonMeta.lore(description);
+        buttonMeta.setEnchantmentGlintOverride(enchanted);
 
         itemStack.setItemMeta(buttonMeta);
         itemStack.setAmount(count);

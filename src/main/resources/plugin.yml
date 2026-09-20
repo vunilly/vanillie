@@ -1,7 +1,7 @@
 name: Vanillie
-version: 1.6
+version: 1.7
 main: com.vunilly.vanillie.Vanillie
-api-version: '26.1'
+api-version: '26.2'
 
 commands:
   tag:
@@ -24,6 +24,14 @@ commands:
     description: Lets you connect your Twitch channel and show a notification when you are live
     aliases: [ttv, stream]
     usage: /twitch
+  stats:
+    description: Get Stats of players
+    aliases: [ info ]
+    usage: /stats <enderchest|inventory|playtime> <name>
+  givebiomewand:
+    description: Gives you the Biomewand
+    aliases: []
+    usage: /givebiomewand
   vanillieconf:
     description: Plugin config command
     aliases: [vconf]

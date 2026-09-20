@@ -29,7 +29,7 @@ public class NametagListener implements Listener {
         if (TagManager.getAllActiveTagsForPlayer(player.getUniqueId()).size() >= 0) {
             Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
             
-            String teamName = "vanillie_tag_" + player.getUniqueId().toString().substring(0, 8);
+            String teamName = "vanillie_tag_" + player.getUniqueId().toString();
             Team team = board.getTeam(teamName);
             if (team == null) {
                 team = board.registerNewTeam(teamName);

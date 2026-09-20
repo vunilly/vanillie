@@ -2,7 +2,7 @@
 
 Vanillie is a personal project for a minecraft server.
 
-Plugin version: v.1.6
+Plugin version: v.1.7
 
 # Features
 

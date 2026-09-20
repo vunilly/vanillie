@@ -1,6 +1,34 @@
 {
     "lang": {
         "menu": {
+            "stats": {
+                "inventory": {
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Inventar von <name>"
+                },
+                "enderchest": {
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Enderchest von <name>"
+                }
+            },
+            "biomewand": {
+                "title": "<!i><gradient:#20c020:#90c0a0><b>Wähle ein Biom </b>(<current>)",
+                "biome": {
+                    "plains": "<!i><b><c:#91bd59>Plains",
+                    "savanna": "<!i><b><c:#bfb755>Savanne",
+                    "forest": "<!i><b><c:#59ae30>Wald",
+                    "taiga": "<!i><b><c:#68a464>Taiga",
+                    "jungle": "<!i><b><c:#59c93c>Jungle",
+                    "swamp": "<!i><b><c:#6a7039>Sumpf",
+                    "birch_forest": "<!i><b><c:#6ba941>Birken Wald",
+                    "dark_forest": "<!i><b><c:#507a32>Schwarzeichen Wald",
+                    "badlands": "<!i><b><c:#90814d>Tafelberg",
+                    "mushroom_fields": "<!i><b><c:#55c93f>Pilzinsel",
+                    "cherry_grove": "<!i><b><c:#b6db61>Kirschen Hain",
+                    "pale_garden": "<!i><b><c:#778272>Blasser Garten",
+                    "ocean": "<!i><b><c:#3f76e4>Ozean",
+                    "warm_ocean": "<!i><b><c:#43d5ee>Warmer Ozean"
+                },
+                "selected": "<!i><b><gradient:#9187db:#5c64d1>Ausgewählt"
+            },
             "settings": {
                 "title": "<!i><b><gradient:#7f6bff:#c4abff>Vanillie Plugin Einstellungen",
                 "tag": {
@@ -72,18 +100,18 @@
                 "enableEnderman": {
                     "txt": "<!i><b><gradient:#7f6bff:#c4abff>Enderman Block Verbot: <state>",
                     "desc": [
-                            "<!i><gradient:#9187db:#5c64d1>Enderman können keine Blöcke platzieren.",
-                            "",
-                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
-                        ]
+                        "<!i><gradient:#9187db:#5c64d1>Enderman können keine Blöcke platzieren.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
                 },
                 "enableEnd": {
                     "txt": "<!i><b><gradient:#7f6bff:#c4abff>End: <state>",
                     "desc": [
-                            "<!i><gradient:#9187db:#5c64d1>Das End kann nicht betritten werden.",
-                            "",
-                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
-                        ]
+                        "<!i><gradient:#9187db:#5c64d1>Das End kann nicht betritten werden.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
                 },
                 "pvp": {
                     "enabled": {
@@ -107,19 +135,19 @@
                 "xpEnabled": {
                     "txt": "<!i><b><gradient:#7f6bff:#c4abff>Befüllbare XP Flaschen: <state>",
                     "desc": [
-                            "<!i><gradient:#9187db:#5c64d1>Spieler können XP in flaschen speichern",
-                            " in dem Sie leere Flaschen rechtsklicken.",
-                            "",
-                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
-                        ]
+                        "<!i><gradient:#9187db:#5c64d1>Spieler können XP in flaschen speichern",
+                        " in dem Sie leere Flaschen rechtsklicken.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
                 },
                 "biomeWandEnabled": {
                     "txt": "<!i><b><gradient:#7f6bff:#c4abff>Biome Wand Item und Crafting Rezept: <state>",
                     "desc": [
-                            "<!i><gradient:#9187db:#5c64d1>Spieler können das Biom in einem bestimmten Radius verändern.",
-                            "",
-                            "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
-                        ]
+                        "<!i><gradient:#9187db:#5c64d1>Spieler können das Biom in einem bestimmten Radius verändern.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Linksklick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
                 }
             },
             "twitch": {
@@ -354,6 +382,16 @@
             "unknownParam": "<gradient:#ff52dc:#c4abff>Unbekannte(r) Parameter.",
             "playerJoined": " <c:#fff23d>ist dem Spiel beigetreten.",
             "playerLeft": " <c:#fff23d>hat das Spiel verlassen.",
+            "rp" : {
+                "txt" : "<gradient:#ff52dc:#c4abff>Bitte aktzeptiere das Texturen Packet!"
+            },
+            "stats": {
+                "cantFindPlayer": "<gradient:#ff52dc:#c4abff>Spieler mit dem Namen <b><player></b> konnte nicht gefunden werden.",
+                "error": "<gradient:#ff52dc:#c4abff>Ein unerwarteter Fehler ist augetreten."
+            },
+            "biomewand": {
+                "selectedBiome": "<gradient:#9187db:#5c64d1>Das Biom <biome> wurde aktiviert."
+            },
             "restart": {
                 "scheduled": "\n\n\n<gradient:#fff23d:#ffbfa0><u>⚠<b> SERVER BENACHRICHTIGUNG </b>⚠</u>\n\n⏻ Der Server wird um <gradient:#ff52dc:#c4abff><time></gradient> neu gestartet.\nGrund: <gradient:#ff52dc:#c4abff><reason></gradient>\nDer Vorgang sollte weniger als 5 Minuten dauern.\n\nEs wird zu <gradient:#ff52dc:#c4abff>keinem Datenverlust</gradient> kommen. Dennoch pausieren Sie bitte ressourcenintensive Vorgänge (z. B. Chunk-Generierung).\n\n<u><b>                                     </b></u>",
                 "starting": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Beginne Neustartvorgang...",
@@ -370,7 +408,7 @@
             "size": {
                 "current": "<gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß (<incm> Centimeter).",
                 "changed": "<gradient:#9187db:#5c64d1>Deine Größe wurde auf <new> Blöcke geändert (<incm> Centimeter).",
-                "error": "<gradient:#ff52dc:#c4abff>Ein Fehler ist augetreten.",
+                "error": "<gradient:#ff52dc:#c4abff>Ein unerwarteter Fehler ist augetreten.",
                 "minus": "<gradient:#ff52dc:#c4abff>Du bist schon so klein wie möglich!",
                 "plus": "<gradient:#ff52dc:#c4abff>Du bist schon so groß wie möglich!",
                 "cantChange": "<gradient:#ff52dc:#c4abff>Du kannst deine Größe nicht ändern, während du im Kampfmodus bist."
@@ -473,9 +511,9 @@
                 "name": "Biomstab",
                 "desc": [
                     "Ein magischer Zauberstab der den Staub",
-                    "von Biomen mit Linksklick einsaugt oder abgibgt.",
-                    "Rechtsklicke um ein Biom auszuwählen.",
-                    "Reparierbar mit Amethysten. Verzauberbar."
+                    "von Biomen mit Linksklick abgibt.",
+                    "Rechtsklick um ein Biom auszuwählen.",
+                    "Reparierbar mit Amethysten im Amboss."
                 ]
             }
         },

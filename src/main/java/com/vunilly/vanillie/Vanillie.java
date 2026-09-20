@@ -1,10 +1,12 @@
 package com.vunilly.vanillie;
 
+import com.vunilly.vanillie.biome.*;
 import com.vunilly.vanillie.enderman.EndermanListener;
 import com.vunilly.vanillie.restart.RestartCommand;
 import com.vunilly.vanillie.settings.SettingsCommand;
 import com.vunilly.vanillie.settings.SettingsManager;
 
+import com.vunilly.vanillie.stats.StatsViewerCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -12,9 +14,6 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.vunilly.vanillie.display.JoinLeaveListener;
-import com.vunilly.vanillie.biome.BiomeWand;
-import com.vunilly.vanillie.biome.BiomeWandListener;
-import com.vunilly.vanillie.biome.RecipeListener;
 import com.vunilly.vanillie.display.ChatListener;
 import com.vunilly.vanillie.pvp.PvpCommand;
 import com.vunilly.vanillie.pvp.PvpListener;
@@ -94,8 +93,21 @@ public class Vanillie extends JavaPlugin {
 
         BiomeWand biomeWand = new BiomeWand();
         Bukkit.addRecipe(biomeWand.getRecipe(this));
-        getServer().getPluginManager().registerEvents(new RecipeListener(), this);
-        getServer().getPluginManager().registerEvents(new BiomeWandListener(new BiomeWand()), this);
+        getServer().getPluginManager().registerEvents(new RecipeListener(biomeWand), this);
+        getServer().getPluginManager().registerEvents(new BiomeWandListener(biomeWand), this);
+        if (getCommand("givebiomewand") != null) {
+            getCommand("givebiomewand").setExecutor(new GiveBiomeWandCommand());
+        } else {
+            getLogger().severe("Vanillie failed to register the /givebiomewand command!");
+        }
+
+
+        if (getCommand("stats") != null) {
+            getCommand("stats").setExecutor(new StatsViewerCommand());
+            getCommand("stats").setTabCompleter(new StatsViewerCommand());
+        } else {
+            getLogger().severe("Vanillie failed to register the /stats command!");
+        }
 
 
         if (getCommand("vanillieconf") != null) {
