@@ -27,6 +27,7 @@ public class Lang {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static final Map<String, List<String>> LANG = new LinkedHashMap<>();
     private static File dataFile;
+    private static JavaPlugin plugin;
 
     public static void clearData() {
         LANG.clear();
@@ -35,17 +36,47 @@ public class Lang {
     public static void loadLang() {
         LANG.clear();
 
-        if (!dataFile.exists()) {
-            return;
-        }
+        try {
+            if (dataFile.exists()) {
+                // Load from the actual filesystem
+                try (FileReader reader = new FileReader(dataFile, StandardCharsets.UTF_8)) {
+                    JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
 
-        try (FileReader reader = new FileReader(dataFile, StandardCharsets.UTF_8)) {
-            JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+                    if (root.has("lang")) {
+                        loadJsonSection(root.getAsJsonObject("lang"), "");
+                    }
+                }
 
-            if (root.has("lang")) {
-                loadJsonSection(root.getAsJsonObject("lang"), "");
+                return;
             }
-        } catch (IOException e) {
+
+            // File doesn't exist -> load directly from the bundled JAR resource
+            try (var input = plugin.getResource("lang.json")) {
+                if (input == null) {
+                    plugin.getLogger().warning("Could not find bundled lang.json in the plugin JAR!");
+                    return;
+                }
+
+                String json = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+                JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+
+                if (root.has("lang")) {
+                    loadJsonSection(root.getAsJsonObject("lang"), "");
+                }
+
+                // Also create the external file for future use
+                if (!dataFile.getParentFile().exists()) {
+                    dataFile.getParentFile().mkdirs();
+                }
+
+                try (FileWriter writer = new FileWriter(dataFile, StandardCharsets.UTF_8)) {
+                    writer.write(json);
+                }
+
+            }
+
+        } catch (Exception e) {
+            plugin.getLogger().severe("Failed to load lang.json: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -117,6 +148,8 @@ public class Lang {
         if (!dataFile.exists()) {
             plugin.saveResource("lang.json", false);
         }
+
+        Lang.plugin = plugin;
     }
 
     private static void add(String key, String text) {

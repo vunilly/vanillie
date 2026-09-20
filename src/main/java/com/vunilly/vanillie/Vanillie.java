@@ -7,6 +7,7 @@ import com.vunilly.vanillie.settings.SettingsCommand;
 import com.vunilly.vanillie.settings.SettingsManager;
 
 import com.vunilly.vanillie.stats.StatsViewerCommand;
+import com.vunilly.vanillie.utils.ResourcePackListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -30,6 +31,8 @@ import com.vunilly.vanillie.vote.VoteCommand;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import com.vunilly.vanillie.utils.ClickMenuListener;
+
+import java.io.File;
 
 public class Vanillie extends JavaPlugin {
     private SignUi signUI;
@@ -136,6 +139,9 @@ public class Vanillie extends JavaPlugin {
         } else {
             getLogger().severe("Vanillie failed to register the /vanilliesettings command!");
         }
+
+        getServer().getPluginManager()
+                .registerEvents(new ResourcePackListener(), this);
     }
 
     public SignUi getSignUI() {

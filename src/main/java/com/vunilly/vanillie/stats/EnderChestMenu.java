@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 import net.querz.nbt.tag.CompoundTag;
@@ -67,7 +68,7 @@ public class EnderChestMenu implements ClickMenu {
             }
 
         } catch (Exception e) {
-            Bukkit.getPlayer(senderUUID).sendMessage("msg.stats.error");
+            Objects.requireNonNull(Bukkit.getPlayer(senderUUID)).sendMessage(Lang.get("msg.stats.error").getFirst());
             Bukkit.getLogger().warning("[Vanillie] An error occured while trying to get Ender Chests contents: " + e);
         }
     }

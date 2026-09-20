@@ -1,12 +1,57 @@
 # Vanillie - For a pleasent minecraft server experience
 
-Vanillie is a personal project for a minecraft server.
+❤︎ Vanillie is a personal project for a cozy minecraft server with friends.
+However it can be used by anyone! ❤︎
 
-Plugin version: v.1.7
+(´｡• ᵕ •｡`) ♡
+
+** *
+
+### Quick Info
+* **Plugin Version:** `v1.7`
+* **Intended Game Version:** `26.2`
+* **Language Support:** Currently only German (*Customize every text via `lang.json`*)
+* **Approach:** Clean and simple UI, that is super user-friendly
+
+** *
+
+### Setup Guide
+#### Compile from scratch
+1. Download the repository and extract it
+2. Run gradle and build the plugin from source with `.\gradlew build` in the root directory
+3. Copy the file called `Vanillie-X.X.jar` from the `build/libs/` directory into your servers plugin folder
+#### Download the prebuilt binary
+1.
+
+** *
 
 # Features
+**Click on the text to jump to a longer explanation!**
+
+| Feature                                                                                 | Images                                                                                                                                                                                  |
+|:----------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Enderman dont place blocks](#enderman-stop-placing-blocks)                             | :D                                                                                                                                                                                      |
+| [Change biomes with a wand](#biomewand)                                                 | <img src="imgs/biome-wand-animation.png" alt="Biome" height="200"><img src="imgs/biome-wand.png" alt="Biome" height="100"><img src="imgs/biome-wand-item.png" alt="Biome" height="100"> |
+| [Create, reorder custom colored tags next to your name](#tag---custom-prefixes)         | <img src="imgs/tag.png" alt="Preview of tags" height=200><img src="imgs/tag-menu.png" alt="Tag Menu" height=100>                                                                        |
+| [Vote to change the weather or time](#vote---weather-and-time-voting)                   | <img src="imgs/vote.png" alt="Voting in action" height=200><img src="imgs/vote-menu.png" alt="Voting Menu" height=100>                                                                  |
+| [Activate a peaceful or fighting (pvp) mode](#pvp---toggle-pvp)                         | <img src="imgs/pvp-on.png" alt="PvP is On" height=100><img src="imgs/pvp-off.png" alt="PvP is Off" height=100>                                                                          |
+| [Change your players size](#size---change-player-model-size)                            | <img src="imgs/size.png" alt="A tiny player" height=200><img src="imgs/size-menu.png" alt="Size menu" height=100>                                                                       |
+| [Notify others when you are live on Twitch](#twitch---connect-your-twitch-channel)      | <img src="imgs/live.png" alt="Someone joining and it showing in chat and next to their name that they are live" height=200>                                                             |
+| [See others inventory and enderchest](#stats---see-other-players-inventory--enderchest) | <img src="imgs/inventory-of-someone-else.png" alt="Inventory of someone else that is offline" height=200>                                                                               |
+| [Restart Command to warn others before the server shuts down](#other-stuff)             |                                                                                                                                                                                         |
 
 All features are integrated in a nice, clean and simple to use ui. The plugin is designed to be very user friendly.
+
+## Enderman stop placing blocks
+Enderman have been changed to not place down blocks, because it can get really anoying for many players.
+
+## BiomeWand
+A biomewand has been added that allows players to change the biome where they are, this is usefull for players who want
+certain features like water color or grass color.
+- Item is crafted from 1x Stick, 1x Diamond, 1x Amethyst Shard
+- Has an animation and sound effects
+- Rightclick opens a menu to choose what biome to place
+- Leftclick will place the biome
 
 ## /tag - custom prefixes
 You can create custom tags/prefixes, with a list of colors or your own colors.
@@ -17,16 +62,15 @@ You can create custom tags/prefixes, with a list of colors or your own colors.
 - Players can change the order how they are shown
 
 ## /vote - weather and time voting
-Players can vote for either day, night, clear weather, rain or thunderstorm.
-- Shows voting in chat with clickable buttons in chat
-- Shows time remaining in bossbar
+Players can start server-wide votes to change weather or time.
+- Options: `Day`, `Night`, `Rain`, `Thunder`, `Clear Weather`
+- Interactable buttons shown in chat and countdown is displayed in bossbar
 
 ## /pvp - toggle pvp
-Players who just want to chill can turn off pvp/turn on pacifist mode
-- Has 60 second cooldown before you can turn it off
-- In pacifist mode, you cant hit players or get hit
-- Mobs still hit you
-- Cannot be changed when player size is too small
+Switch to peaceful mode whenever you want to relax and build and turn PvP on when you want to fight
+- Has a 60-second cooldown to be useable after being hit by a player
+- In pacifist mode, you cannot deal or receive damage to other players
+- Mobs (like zombies) can still attack you
 
 ## /size - change player model size
 Players can change their ingame size
@@ -41,12 +85,19 @@ Players can set a twitch username as theirs
 - A message will be broadcastet when they are live
 - Players have to rejoin
 
-## Other stuff
-- /vanillieconifg - `/vconf <clearconfig|reloadconfig|saveconfig|resetbook>` (resetbook shows a book on first join, resetbook allows you to show it again if you change it, which requirese a recompilation)
-- /vanillie - Shows a book with info on the plugin
-- /schedulerestart - Schedules a shutdown
-- Join messages will be changed if you have tag active
-- Enderman cannot pick up blocks
+## /stats - see other players inventory & enderchest
+Players can see others inventory and enderchest.
+Usage: `/stats <inventory|enderchest> <playername>`
+- Item Names, Enchantments on Items and Durability are hidden
+- Items can only ever be viewed, never removed
+- Works with offline players
 
-# Language
-The plugin (by default) comes with a German language pack and no english translation. However, after starting the plugin, in the plugin folder there is a file called `lang.json` which you can edit to your liking. Then use `/vconf reloadconfig` (FIRST USE `/vconf saveconfig` TO SAVE ALL OTHER DATA!)
+## Other stuff
+- `/vanillieconfig` (or `/vconf` for short) - Reload configuration files
+- - `clearconfig` - Clears all configurations to nothing
+- - `reloadconfig` - Reloads all configurations from the files 
+- - `saveconfig` - Saves current in memory data
+- - `lang <filename>` - Loads a different file name for a lang, by default `en` and `de` are supported
+- `/vanillie` - Shows plugin information and credits
+- `/schedulerestart` - Schedules a shutdown with a message
+- Join messages are changed
