@@ -21,7 +21,8 @@ However it can be used by anyone! ❤︎
 2. Run gradle and build the plugin from source with `.\gradlew build` in the root directory
 3. Copy the file called `Vanillie-X.X.jar` from the `build/libs/` directory into your servers plugin folder
 #### Download the prebuilt binary
-1.
+1. Download the newest `Vanillie-X.X.jar` from the releases list (the texture pack is not needed)
+2. Place it inside your servers plugin folder
 
 ** *
 
