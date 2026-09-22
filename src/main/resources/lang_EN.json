@@ -1,0 +1,528 @@
+{
+    "lang": {
+        "menu": {
+            "stats": {
+                "inventory": {
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Inventory of <name>"
+                },
+                "enderchest": {
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Enderchest of <name>"
+                }
+            },
+            "biomewand": {
+                "title": "<!i><gradient:#20c020:#90c0a0><b>Choose a biome </b>(<current>)",
+                "biome": {
+                    "plains": "<!i><b><c:#91bd59>Plains",
+                    "savanna": "<!i><b><c:#bfb755>Savanna",
+                    "forest": "<!i><b><c:#59ae30>Forest",
+                    "taiga": "<!i><b><c:#68a464>Taiga",
+                    "jungle": "<!i><b><c:#59c93c>Jungle",
+                    "swamp": "<!i><b><c:#6a7039>Swamp",
+                    "birch_forest": "<!i><b><c:#6ba941>Birch Forest",
+                    "dark_forest": "<!i><b><c:#507a32>Dark Oak Forest",
+                    "badlands": "<!i><b><c:#90814d>Mesa",
+                    "mushroom_fields": "<!i><b><c:#55c93f>Mushroom Island",
+                    "cherry_grove": "<!i><b><c:#b6db61>Cherry Grove",
+                    "pale_garden": "<!i><b><c:#778272>Pale Garden",
+                    "ocean": "<!i><b><c:#3f76e4>Ocean",
+                    "warm_ocean": "<!i><b><c:#43d5ee>Warm Ocean"
+                },
+                "selected": "<!i><b><gradient:#9187db:#5c64d1>Selected"
+            },
+            "settings": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Vanillie Plugin Settings",
+                "tag": {
+                    "maxPlayer": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Max created Tag count: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>The maximum number of tags a player can create.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> to toggle this Feature"
+                        ]
+                    },
+                    "maxActive": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Maximale aktive Tag Anzahl: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die maximale Anzahl an Tags die jeder Spieler aktiviert haben kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    }
+                },
+                "vote": {
+                    "enableDaytimes": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Tageszeiten Voting: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können Nacht oder Tag voten.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    },
+                    "enableWeather": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Wetter Voting: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können Regen, Gewitter oder klares Wetter voten.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    }
+                },
+                "enableTwitch": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Twitch Command: <state>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Spieler können ihren Twitch-Accountnamen verbinden",
+                        "<!i><gradient:#9187db:#5c64d1>Wenn dieser Kanal live ist steht das beim joinen",
+                        "<!i><gradient:#9187db:#5c64d1>im chat und neben dem Namen.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
+                },
+                "size": {
+                    "minSize": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Kleinste Spieler Größe: <min>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die kleinste größe die ein Spieler sein kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um den Wert zu erhöhen",
+                            "<!i><gradient:#7f6bff:#c4abff>> Rightclick<gradient:#9187db:#5c64d1> um den Wert zu verringern"
+                        ]
+                    },
+                    "maxSize": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Größte Spieler Größe: <max>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Die größte Größe die ein Spieler sein kann.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um den Wert zu erhöhen",
+                            "<!i><gradient:#7f6bff:#c4abff>> Rightclick<gradient:#9187db:#5c64d1> um den Wert zu verringern"
+                        ]
+                    }
+                },
+                "enableEnderman": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Enderman Block Verbot: <state>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Enderman können keine Blöcke platzieren.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
+                },
+                "enableEnd": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>End: <state>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Das End kann nicht betritten werden.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
+                },
+                "pvp": {
+                    "enabled": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>PvP Toggle: <state>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Spieler können PvP in einen Friedensmodus wechseln,",
+                            "<!i><gradient:#9187db:#5c64d1>in dem Sie nicht angegriffen werden können.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    },
+                    "timer": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>PvP Timer: <zeit> Sekunden",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Der Timer der Spieler nicht in den Friendensmodus wechseln lässt.",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                        ]
+                    }
+                },
+                "xpEnabled": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Befüllbare XP Flaschen: <state>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Spieler können XP in flaschen speichern",
+                        " in dem Sie leere Flaschen Rightclicken.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
+                },
+                "biomeWandEnabled": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Biome Wand Item und Crafting Rezept: <state>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Spieler können das Biom in einem bestimmten Radius verändern.",
+                        "",
+                        "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um dieses Feature an oder aus zu schalten"
+                    ]
+                }
+            },
+            "twitch": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Twitch Namen eistellen",
+                "select": "<!i><b><gradient:#7f6bff:#c4abff>Klicke um deinen Nutzernamen auszuwählen",
+                "signUi": {
+                    "1": "1&2 Zeile eingeben"
+                }
+            },
+            "size": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Ändere deine Größe",
+                "minus": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um kleiner zu werden",
+                "plus": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um größer zu werden",
+                "minuscm": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um 1cm kleiner zu werden",
+                "pluscm": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um 1cm größer zu werden",
+                "current": {
+                    "txt": "<!i><b><gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß",
+                    "desc": "<!i><b><gradient:#9187db:#5c64d1>Das sind <incm> Centimeter"
+                }
+            },
+            "vote": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Starte eine Abstimmung",
+                "type": {
+                    "day": "<!i><b><color:#fcc844>Klicke um für Tag abzustimmen.",
+                    "night": "<!i><b><color:#4a44fc>Klicke um für Nacht abzustimmen.",
+                    "clear": "<!i><b><color:#d3d1ff>Klicke um für klares Wetter abzustimmen.",
+                    "rain": "<!i><b><color:#0a8efa>Klicke um für Regen abzustimmen.",
+                    "thunder": "<!i><b><color:#0039b5>Klicke um für Gewitter abzustimmen."
+                }
+            },
+            "pvp": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>PvP einstellen",
+                "off": {
+                    "txt": "<!i><b><gradient:#4ceb34:#34eb98>Klicke um PvP auszustellen",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Du kannst dann Spieler*innen nicht angreifen und",
+                        "<!i><gradient:#9187db:#5c64d1>nicht von Spieler*innen angegriffen werden"
+                    ]
+                },
+                "on": {
+                    "txt": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um PvP anzustellen",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Du kannst dann Spieler*innen angreifen und",
+                        "<!i><gradient:#9187db:#5c64d1>von Spieler*innen angegriffen werden"
+                    ]
+                }
+            },
+            "back": "<!i><gradient:#9187db:#5c64d1>Zurück",
+            "backCancel": "<!i><b><gradient:#ff52dc:#c4abff>❌ Abbrechen und Zurück",
+            "backSave": "<!i><b><gradient:#4ceb34:#34eb98>✔ Speichern und Zurück",
+            "tag": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Tag-Menü",
+                "new": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>➕ Tag erstellen",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Erstelle einen neuen Tag",
+                        "<!i><gradient:#9187db:#5c64d1>mit eigenen Farben oder Farbverläufen!"
+                    ],
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Neuen Tag erstellen",
+                    "color": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Farbe auswählen",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Klicke um einen Farbverlauf",
+                            "<!i><gradient:#9187db:#5c64d1>(oder eine einzelne) Farbe einzustellen"
+                        ]
+                    },
+                    "text": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Text eingeben",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Klicke um den Text deines",
+                            "<!i><gradient:#9187db:#5c64d1>neuen Tags einzugeben"
+                        ]
+                    },
+                    "save": {
+                        "txt": "<!i><b><gradient:#4ceb34:#34eb98>✔ Tag Speichern",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Speichere deinen erstellten Tag",
+                            "<!i><gradient:#9187db:#5c64d1>und aktiviere ihn.",
+                            "<!i><gradient:#9187db:#5c64d1>Er wird automatisch für andere",
+                            "<!i><gradient:#9187db:#5c64d1>in der Serverliste angezeigt"
+                        ]
+                    },
+                    "preview": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>So wird dein Tag aussehen:",
+                        "descs": "<!i><color:#ffffff><tag><!b>"
+                    },
+                    "cantSave": {
+                        "txt": "<!i><b><gradient:#ff52dc:#c4abff>❌ Tag kann nicht gespeichert werden",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>- Wähle mehr als eine Farbe aus",
+                            "<!i><gradient:#9187db:#5c64d1>- Wähle einen Text aus"
+                        ]
+                    },
+                    "signUi": {
+                        "0": "Tag Text ganz",
+                        "1": "oben eingeben"
+                    }
+                },
+                "my": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Tag-Reihenfolge",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Hier kannst du die Reihenfolge",
+                        "<!i><gradient:#9187db:#5c64d1>deiner aktiven Tags ändern"
+                    ],
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Tag-Reihenfolge - Seite <page>/<maxpage>",
+                    "emptyPage": {
+                        "txt": "<!i><b><gradient:#ff52dc:#c4abff>❌ Du hast keine Tags aktiviert",
+                        "desc": "<!i><gradient:#9187db:#5c64d1>Erstelle einen oder aktiviere einen in der Server Liste"
+                    },
+                    "tag": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff><tag><!b> - <!i></b><gradient:#9187db:#5c64d1>(ID: <id>)",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Ersteller*in: <gradient:#7f6bff:#c4abff><ownername>",
+                            "<!i><gradient:#9187db:#5c64d1>Benutzer: <gradient:#7f6bff:#c4abff><usercount>",
+                            "",
+                            "<!i><gradient:#7f6bff:#c4abff>> Leftclick<gradient:#9187db:#5c64d1> um den Tag nach vorne zu bewegen",
+                            "<!i><gradient:#7f6bff:#c4abff>> Rightclick<gradient:#9187db:#5c64d1> um den Tag nach hinten zu bewegen"
+                        ]
+                    }
+                },
+                "server": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Server-Tags",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Sieh alle auf diesem Server erstellten Tags.",
+                        "<!i><gradient:#9187db:#5c64d1>Du kannst hier andere Tags <gradient:#4ceb34:#34eb98>aktivieren</gradient><gradient:#9187db:#5c64d1>",
+                        "<!i><gradient:#9187db:#5c64d1>Aktivierte Tags <gradient:#7f6bff:#c4abff>deaktivieren</gradient><gradient:#9187db:#5c64d1>",
+                        "<!i><gradient:#9187db:#5c64d1>oder auch Tags <gradient:#ff52dc:#c4abff>löschen</gradient><gradient:#9187db:#5c64d1>"
+                    ],
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Server-Tags - Seite <page>/<maxpage>",
+                    "emptyPage": {
+                        "txt": "<!i><b><gradient:#ff52dc:#c4abff>❌ Es gibt noch keine Tags",
+                        "desc": "<!i><gradient:#9187db:#5c64d1>Erstelle einen damit dieser hier auftaucht"
+                    },
+                    "tag": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff><tag><!b> - <!i></b><gradient:#9187db:#5c64d1>(ID: <id>)",
+                        "desc": {
+                            "active": [
+                                "<!i><gradient:#9187db:#5c64d1>Ersteller*in: <gradient:#7f6bff:#c4abff><ownername>",
+                                "<!i><gradient:#9187db:#5c64d1>Benutzer: <gradient:#7f6bff:#c4abff><usercount>",
+                                "",
+                                "<!i><b><gradient:#23eb98:#8aff7d>> Aktiviert",
+                                "<!i><gradient:#7f6bff:#c4abff>Deaktiviert",
+                                "",
+                                "<!i><gradient:#7f6bff:#c4abff>> Leftclick zum deaktivieren",
+                                "<!i><gradient:#7f6bff:#c4abff>> Rightclick zum Löschen"
+                            ],
+                            "inactive": [
+                                "<!i><gradient:#9187db:#5c64d1>Ersteller*in: <gradient:#7f6bff:#c4abff><ownername>",
+                                "<!i><gradient:#9187db:#5c64d1>Benutzer: <gradient:#7f6bff:#c4abff><usercount>",
+                                "",
+                                "<!i><gradient:#7f6bff:#c4abff> Aktiviert",
+                                "<!i><b><gradient:#ff52dc:#c4abff>> Deaktiviert",
+                                "",
+                                "<!i><gradient:#7f6bff:#c4abff>> Leftclick zum aktivieren",
+                                "<!i><gradient:#7f6bff:#c4abff>> Rightclick zum Löschen"
+                            ]
+                        }
+                    },
+                    "filter": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Tags Filtern",
+                        "desc": {
+                            "all": [
+                                "<!i><gradient:#9187db:#5c64d1>Meine erstellten Tags",
+                                "<!i><b><gradient:#23eb98:#8aff7d>> Alle erstellten Tags"
+                            ],
+                            "mine": [
+                                "<!i><b><gradient:#23eb98:#8aff7d>> Meine erstellten Tags",
+                                "<!i><gradient:#9187db:#5c64d1>Alle erstellten Tags"
+                            ]
+                        }
+                    }
+                },
+                "colorBuilder": {
+                    "title": "<!i><b><gradient:#7f6bff:#c4abff>Farbverlauf erstellen",
+                    "addColor": {
+                        "txt": "<!i><b><gradient:#4ceb34:#34eb98>➕ Farbe Hinzufügen"
+                    },
+                    "color": {
+                        "txt": "<!i><b><gradient:#7f6bff:#c4abff>Farbe: <c:<hexcode>>FARBTEST</c>",
+                        "desc": [
+                            "<!i><gradient:#9187db:#5c64d1>Klicke um diese Farbe zu wählen",
+                            "<!i><gradient:#9187db:#5c64d1>(Hex Code: <hexcode>)"
+                        ]
+                    }
+                },
+                "tagFail": {
+                    "txt": "<!i><b><gradient:#ff52dc:#c4abff>❌ Fehler beim Laden des Tags"
+                },
+                "delete": {
+                    "title": "<!i><b><gradient:#ff52dc:#c4abff><tag><b> wirklich löschen?",
+                    "txt": "<!i><b><gradient:#ff52dc:#c4abff>Klicke um <tag><!b> permanent löschen",
+                    "desc": "<!i><gradient:#ff52dc:#c4abff>Der Tag wird permanent für alle Nutzer gelöscht"
+                }
+            },
+            "colorList": {
+                "title": "<!i><b><gradient:#7f6bff:#c4abff>Wähle eine Farbe - Seite <page>/<maxpage>",
+                "createColor": {
+                    "txt": "<!i><b><gradient:#4ceb34:#34eb98>➕ Eigene Farbe",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Gib einen HEX-Farbcode ein",
+                        "<!i><gradient:#9187db:#5c64d1>um eine eigene Farbe zu verwenden",
+                        "",
+                        "<!i><gradient:#9187db:#5c64d1>Suche online nach",
+                        "<!i><gradient:#9187db:#5c64d1>Farbwähler und kopiere",
+                        "<!i><gradient:#9187db:#5c64d1>den HEX-Code deiner Wunschfarbe"
+                    ]
+                },
+                "color": {
+                    "txt": "<!i><b><gradient:#7f6bff:#c4abff>Farbe: <!b><c:<hexcode>>❤❤❤❤❤</c>",
+                    "desc": [
+                        "<!i><gradient:#9187db:#5c64d1>Klicke um diese Farbe zu wählen",
+                        "<!i><gradient:#9187db:#5c64d1>(Hex Code: <hexcode>)"
+                    ]
+                },
+                "signUi": {
+                    "0": "HEX-Code oben",
+                    "1": "eingeben (z.b. #ff0000)"
+                }
+            },
+            "page": {
+                "next": "<!i><b><gradient:#7f6bff:#c4abff>Nächste Seite",
+                "last": "<!i><b><gradient:#7f6bff:#c4abff>Letzte Seite"
+            }
+        },
+        "msg": {
+            "needOp": "<gradient:#ff52dc:#c4abff>Du brauchst OP um diesen Befehl zu verwenden.",
+            "onlyPlayersAllowed": "<gradient:#ff52dc:#c4abff>Nur Spieler*innen können diesen Befehl verwenden!",
+            "tooManyParams": "<gradient:#ff52dc:#c4abff>Dieser Befehl benötigt keine weiteren Parameter!",
+            "tooManyParamsOkay": "<gradient:#ff52dc:#c4abff>Du musst nur \"/<command>\" eingeben btw :)",
+            "tooFewParams": "<gradient:#ff52dc:#c4abff>Dieser Befehl benötigt mehr Parameter!",
+            "incorrectParams": "<gradient:#ff52dc:#c4abff>Fehlerhafte(r) Parameter.",
+            "unknownParam": "<gradient:#ff52dc:#c4abff>Unbekannte(r) Parameter.",
+            "playerJoined": " <c:#fff23d>ist dem Spiel beigetreten.",
+            "playerLeft": " <c:#fff23d>hat das Spiel verlassen.",
+            "rp" : {
+                "txt" : "<gradient:#ff52dc:#c4abff>Bitte aktzeptiere das Texturen Packet!"
+            },
+            "stats": {
+                "cantFindPlayer": "<gradient:#ff52dc:#c4abff>Spieler mit dem Namen <b><player></b> konnte nicht gefunden werden.",
+                "error": "<gradient:#ff52dc:#c4abff>Ein unerwarteter Fehler ist augetreten."
+            },
+            "biomewand": {
+                "selectedBiome": "<gradient:#9187db:#5c64d1>Das Biom <biome> wurde aktiviert."
+            },
+            "restart": {
+                "scheduled": "\n\n\n<gradient:#fff23d:#ffbfa0><u>⚠<b> SERVER BENACHRICHTIGUNG </b>⚠</u>\n\n⏻ Der Server wird um <gradient:#ff52dc:#c4abff><time></gradient> neu gestartet.\nGrund: <gradient:#ff52dc:#c4abff><reason></gradient>\nDer Vorgang sollte weniger als 5 Minuten dauern.\n\nEs wird zu <gradient:#ff52dc:#c4abff>keinem Datenverlust</gradient> kommen. Dennoch pausieren Sie bitte ressourcenintensive Vorgänge (z. B. Chunk-Generierung).\n\n<u><b>                                     </b></u>",
+                "starting": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Beginne Neustartvorgang...",
+                "saving": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Speichere Ressource...",
+                "bye": "<gradient:#fff23d:#ffbfa0><b>[Server Neustart]</b> Ressourcen wurden gespeichert. Kappe Verbindungen, bis gleich!",
+                "kicked": "\n\n<gradient:#fff23d:#ffbfa0><b>⚠ Du wurdest durch einen automatischen Neustart gekickt.\n\n<gradient:#ff52dc:#c4abff>Bitte warte kurz (max. 5 Minuten) und verbinde dich erneut.</gradient></gradient>",
+                "bossbar": "<c:#fff23d>Geplanter Server Neustart"
+            },
+            "twitch": {
+                "isLive": "<color:#9146FF><b><player></b> streamt auf Twitch unter <b>ttv/<twitchname></b>",
+                "savedText": "<gradient:#9187db:#5c64d1>Twitch account name wurde gespeichert. Wenn du nun live gehst, wird es im Chat angezeigt.",
+                "didntSaveText": "<gradient:#ff52dc:#c4abff>Twitch account name wurde nicht gespeichert."
+            },
+            "size": {
+                "current": "<gradient:#9187db:#5c64d1>Du bist grade <current> Blöcke groß (<incm> Centimeter).",
+                "changed": "<gradient:#9187db:#5c64d1>Deine Größe wurde auf <new> Blöcke geändert (<incm> Centimeter).",
+                "error": "<gradient:#ff52dc:#c4abff>Ein unerwarteter Fehler ist augetreten.",
+                "minus": "<gradient:#ff52dc:#c4abff>Du bist schon so klein wie möglich!",
+                "plus": "<gradient:#ff52dc:#c4abff>Du bist schon so groß wie möglich!",
+                "cantChange": "<gradient:#ff52dc:#c4abff>Du kannst deine Größe nicht ändern, während du im Kampfmodus bist."
+            },
+            "vote": {
+                "type": {
+                    "day": "<gradient:#7f6bff:#c4abff>Spieler*in <player> hat sich <c:#fcc844>Tag</c> gewünscht. Bist du dafür? Klicke auf <gradient:#4ceb34:#34eb98><u><yes></u> <color:#fcc844>oder <gradient:#ff52dc:#c4abff><u><no></u>",
+                    "night": "<gradient:#7f6bff:#c4abff>Spieler*in <player> hat sich <c:#4a44fc>Nacht</c> gewünscht. Bist du dafür? Klicke auf <gradient:#4ceb34:#34eb98><u><yes></u> <color:#4a44fc>oder <gradient:#ff52dc:#c4abff><u><no></u>",
+                    "clear": "<gradient:#7f6bff:#c4abff>Spieler*in <player> hat sich <c:#d3d1ff>klares Wetter</c> gewünscht. Bist du dafür? Klicke auf <gradient:#4ceb34:#34eb98><u><yes></u> <color:#d3d1ff>oder <gradient:#ff52dc:#c4abff><u><no></u>",
+                    "rain": "<gradient:#7f6bff:#c4abff>Spieler*in <player> hat sich <c:#0a8efa>Regen</c> gewünscht. Bist du dafür? Klicke auf <gradient:#4ceb34:#34eb98><u><yes></u> <color:#0a8efa>oder <gradient:#ff52dc:#c4abff><u><no></u>",
+                    "thunder": "<gradient:#7f6bff:#c4abff>Spieler*in <player> hat sich <c:#0039b5>Gewitter</c> gewünscht. Bist du dafür? Klicke auf <gradient:#4ceb34:#34eb98><u><yes></u> <color:#0039b5>oder <gradient:#ff52dc:#c4abff><u><no></u>"
+                },
+                "voted": {
+                    "yes": "<gradient:#4ceb34:#34eb98>Du hast dafür gestimmt!",
+                    "no": "<gradient:#ff52dc:#c4abff>Du hast dagegen gestimmt!",
+                    "already": "<gradient:#ff52dc:#c4abff>Du hast schon abgestimmt!"
+                },
+                "notGranted": {
+                    "day": "<gradient:#ff52dc:#c4abff>Es wurde gegen eine Tageszeitänderung gestimmt. Die Zeit bleibt gleich.",
+                    "night": "<gradient:#ff52dc:#c4abff>Es wurde gegen eine Tageszeitänderung gestimmt. Die Zeit bleibt gleich.",
+                    "clear": "<gradient:#ff52dc:#c4abff>Es wurde gegen eine Wetteränderung gestimmt. Das Wetter bleibt gleich.",
+                    "rain": "<gradient:#ff52dc:#c4abff>Es wurde gegen eine Wetteränderung gestimmt. Das Wetter bleibt gleich.",
+                    "thunder": "<gradient:#ff52dc:#c4abff>Es wurde gegen eine Wetteränderung gestimmt. Das Wetter bleibt gleich."
+                },
+                "granted": {
+                    "day": "<gradient:#9187db:#5c64d1>Es wurde für eine Tageszeitänderung gestimmt. <color:#fcc844>Es wird Tag...",
+                    "night": "<gradient:#9187db:#5c64d1>Es wurde für eine Tageszeitänderung gestimmt. <color:#4a44fc>Es wird Nacht...",
+                    "clear": "<gradient:#9187db:#5c64d1>Es wurde für eine Wetteränderung gestimmt. <color:#d3d1ff>Das Wetter wird klar...",
+                    "rain": "<gradient:#9187db:#5c64d1>Es wurde für eine Wetteränderung gestimmt. <color:#0a8efa>Es beginnt zu regnen...",
+                    "thunder": "<gradient:#9187db:#5c64d1>Es wurde für eine Wetteränderung gestimmt. <color:#0039b5>Ein Gewitter zieht auf..."
+                },
+                "bossbar": {
+                    "day": "<c:#fcc844>Abstimmung für Tag (im Chat)</c>",
+                    "night": "<c:#4a44fc>Abstimmung für Nacht (im Chat)</c>",
+                    "clear": "<c:#d3d1ff>Abstimmung für klares Wetter (im Chat)</c>",
+                    "rain": "<c:#0a8efa>Abstimmung für Regen (im Chat)</c>",
+                    "thunder": "<c:#0039b5>Abstimmung für Gewitter (im Chat)</c>"
+                },
+                "alreadyRunning": "<gradient:#9187db:#5c64d1>Eine Abstimmung läuft.",
+                "nonRunning": "<gradient:#9187db:#5c64d1>Es gibt grade keine Abstimmung."
+            },
+            "pvp": {
+                "on": "<gradient:#9187db:#5c64d1>Kampfmodus ist jetzt an. (PvP ist nun an).",
+                "off": "<gradient:#9187db:#5c64d1>Friedensmodus ist jetzt an (PvP ist nun aus)",
+                "combatEnded": "<gradient:#ff52dc:#c4abff>Kampf Cooldown ist nun aus.",
+                "combatSecs": "<gradient:#ff52dc:#c4abff>Kampf Cooldown: <secs>s",
+                "cooldown": "<gradient:#ff52dc:#c4abff>Du hast noch <secs> Sekunden PvP Cooldown!",
+                "tooLow": {
+                    "them": "<gradient:#ff52dc:#c4abff>Spieler*in <player> ist zu klein um fair PvP zu spielen!",
+                    "you": "<gradient:#ff52dc:#c4abff>Du bist zu klein um fair PvP zu spielen!"
+                },
+                "cancelled": {
+                    "them": "<gradient:#ff52dc:#c4abff>Spieler*in <player> ist im Friedensmodus.",
+                    "you": "<gradient:#ff52dc:#c4abff>Du bist im Friedensmodus."
+                }
+            },
+            "tag": {
+                "activeLimitReached": "<gradient:#9187db:#5c64d1>Du kannst nicht mehr als <limit> Tags aktivieren! (Deaktivere einen)",
+                "createLimitReached": "<gradient:#9187db:#5c64d1>Du kannst nicht mehr als <limit> Tags erstellen! (Lösche einen in der Server Liste)",
+                "created": "<gradient:#9187db:#5c64d1>✔ Der Tag <tag><!b> wurde erfolgreich erstellt und für dich aktiviert.",
+                "createdButNotActivated": "<gradient:#9187db:#5c64d1>✔ Der Tag <tag><!b> wurde erfolgreich erstellt aber nicht aktiviert (Du hast schon <limit>/<limit> Tags aktiviert).",
+                "alreadyExists": "<gradient:#9187db:#5c64d1>Ein Tag mit diesem Namen existiert bereits!",
+                "invalidId": "<gradient:#ff52dc:#c4abff>Dieses Tag existiert nicht!",
+                "notYours": "<gradient:#ff52dc:#c4abff>Du darfst nur deine eigenen Tags löschen!",
+                "deleted": "<gradient:#9187db:#5c64d1>✔ Der Tag <tag><!b> wurde erfolgreich gelöscht.",
+                "activated": "<gradient:#9187db:#5c64d1>✔ Tag <tag><!b> wurde erfolgreich aktiviert.",
+                "alreadyActivated": "<gradient:#9187db:#5c64d1>Dieses Tag ist bereits aktiviert!",
+                "deactivated": "<gradient:#9187db:#5c64d1>✔ Tag <tag><!b> wurde erfolgreich deaktiviert.",
+                "alreadyDeactivated": "<gradient:#9187db:#5c64d1>Dieses Tag ist bereits deaktiviert!",
+                "cannotMove": "<gradient:#ff52dc:#c4abff>Tag kann nicht an diese Position verschoben werden!",
+                "moved": "<gradient:#9187db:#5c64d1>✔ Tag-Reihenfolge wurde verändert!",
+                "tagFail": {
+                    "txt": "<gradient:#ff52dc:#c4abff>❌ Fehler beim Laden des Tags"
+                },
+                "colorBuilder": {
+                    "savedAllColors": "<gradient:#9187db:#5c64d1>✔ Farbe(n) wurden gespeichert."
+                },
+                "new": {
+                    "savedText": "<gradient:#9187db:#5c64d1>✔ Tag-Text gespeichert: <!i><b><gradient:#7f6bff:#c4abff><text>",
+                    "didntSaveText": "<gradient:#ff52dc:#c4abff>Du musst einen Text eingeben!",
+                    "cantSave": "<gradient:#ff52dc:#c4abff>Tag kann so nicht gespeichert werden!"
+                }
+            },
+            "signUi": {
+                "posOOB": "<gradient:#ff52dc:#c4abff>Deine Y-Position muss größer als -64 und kleiner als 320 sein. (Der Server kann sonst keine Texteingabe öffnen)"
+            },
+            "confReloaded": "<gradient:#9187db:#5c64d1>✔ Konfiguration neugeladen!",
+            "confSaved": "<gradient:#9187db:#5c64d1>✔ Konfiguration gespeichert!",
+            "confCleared": "<gradient:#9187db:#5c64d1>✔ Konfiguration gelöscht (nutze reloadconf um sie wiederherzustellen)!",
+            "bookReset": "<gradient:#9187db:#5c64d1> Update Buch wurde resettet (Rejoine um es anzuzeigen).",
+            "colorList": {
+                "savedColor": "<gradient:#ff52dc:#c4abff>Hex Farbe wurde gespeichert.",
+                "didntSaveColor": "<gradient:#ff52dc:#c4abff>Farbe wurde nicht gespeichert.",
+                "invalidHex": "<gradient:#ff52dc:#c4abff>Der HEX-Code ist fehlerhaft. Der Hex Code muss 7 Zeichen lang sein, mit 6 folgenden Zeichen. Diese Zeichen können nur 0-9 und A-F sein."
+            },
+            "unknownError": "<gradient:#ff52dc:#c4abff>Ein unbekannter Fehler ist aufgetreten. Das sollte nie passieren!"
+        },
+        "items": {
+            "biomewand": {
+                "name": "Biomstab",
+                "desc": [
+                    "Ein magischer Zauberstab der den Staub",
+                    "von Biomen mit Leftclick abgibt.",
+                    "Rightclick um ein Biom auszuwählen.",
+                    "Reparierbar mit Amethysten im Amboss."
+                ]
+            }
+        },
+        "str": {
+            "playerNameFail": "*Unbekannte*r Spieler*in",
+            "clickHereYes": "[✔ Ja]",
+            "clickHereNo": "[❌ Nein]",
+            "on": "an",
+            "off": "aus"
+        }
+    }
+}
